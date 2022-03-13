@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local M = {}
 
 local packer_status_ok, packer = pcall(require, "packer")
@@ -206,13 +207,13 @@ packer.startup {
     }
 
     -- Formatting and linting
-    -- use {
-    --   "jose-elias-alvarez/null-ls.nvim",
-    --   event = "BufRead",
-    --   config = function()
-    --     require("user.null-ls").config()
-    --   end,
-    -- }
+    use {
+      "jose-elias-alvarez/null-ls.nvim",
+      event = "BufRead",
+      config = function()
+        require("configs.null-ls").config()
+      end,
+    }
 
     -- Fuzzy finder
     use {
@@ -264,6 +265,11 @@ packer.startup {
     -- gruvbox-material
     use {
       "sainnhe/gruvbox-material"
+    }
+
+    -- Harpoon
+    use {
+      "ThePrimeagen/harpoon",
     }
   end,
 

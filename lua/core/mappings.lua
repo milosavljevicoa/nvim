@@ -59,7 +59,8 @@ local lua_files = {
   'configs.comment',
   'configs.luasnip',
   'configs.personal',
-  'configs.symbols-outline'
+  'configs.symbols-outline',
+  'configs.harpoon',
 }
 
 for _, lua_file in ipairs(lua_files) do
