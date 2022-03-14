@@ -18,4 +18,6 @@ vim.cmd(string.format(
   colorscheme
 ))
 
+vim.cmd [[autocmd FileType harpoon setlocal wrap]]
+
 return M

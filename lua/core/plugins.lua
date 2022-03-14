@@ -9,24 +9,16 @@ end
 packer.startup {
   function(use)
     -- Plugin manager
-    use {
-      "wbthomason/packer.nvim",
-    }
+    use "wbthomason/packer.nvim"
 
     -- Optimiser
-    use {
-      "lewis6991/impatient.nvim",
-    }
+    use "lewis6991/impatient.nvim"
 
     -- Lua functions
-    use {
-      "nvim-lua/plenary.nvim",
-    }
+    use "nvim-lua/plenary.nvim"
 
     -- Popup API
-    use {
-      "nvim-lua/popup.nvim",
-    }
+    use "nvim-lua/popup.nvim"
 
     -- Boost startup time
     use {
@@ -98,11 +90,6 @@ packer.startup {
       end,
       requires = {
         {
-          -- Parenthesis highlighting
-          "p00f/nvim-ts-rainbow",
-          after = "nvim-treesitter",
-        },
-        {
           -- Autoclose tags
           "windwp/nvim-ts-autotag",
           after = "nvim-treesitter",
@@ -154,14 +141,10 @@ packer.startup {
       after = "nvim-cmp",
     }
 
-    use {
-      "onsails/lspkind-nvim"
-    }
+    use "onsails/lspkind-nvim"
 
     -- LSP completion source
-    use {
-      "hrsh7th/cmp-nvim-lsp",
-    }
+    use "hrsh7th/cmp-nvim-lsp"
 
     -- LSP manager
     use {
@@ -258,18 +241,17 @@ packer.startup {
     }
 
     -- File switcher
-    use {
-      "milosavljevicoa/switcher.nvim",
-    }
+    use "milosavljevicoa/switcher.nvim"
 
     -- gruvbox-material
-    use {
-      "sainnhe/gruvbox-material"
-    }
+    use "sainnhe/gruvbox-material"
 
     -- Harpoon
     use {
       "ThePrimeagen/harpoon",
+      config = function()
+        require("configs.harpoon").config()
+      end,
     }
   end,
 
