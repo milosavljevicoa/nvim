@@ -51,20 +51,24 @@ map("n", "<A-t>", "<cmd>lua require('switcher').switch_to('ts', 'spec')<CR>", op
 map("n", "<A-n>", "<cmd>lua require('switcher').switch_to('spec.ts', 'spec')<CR>", opts)
 map("n", "<A-s>", "<cmd>lua require('switcher').switch_to('scss', 'spec')<CR>", opts)
 
+local executeMappingns = function()
+  local scan = require 'plenary.scandir'
 
-local lua_files = {
-  'configs.lsp.lspsaga',
-  'configs.telescope',
-  'configs.nvim-tree',
-  'configs.comment',
-  'configs.luasnip',
-  'configs.personal',
-  'configs.symbols-outline',
-  'configs.harpoon'
-}
+  local suffix = "\\lua\\configs"
+  local configs = vim.fn.stdpath "config" ..suffix
+  local files = scan.scan_dir(configs, { hidden = false, depth = 2 })
 
-for _, lua_file in ipairs(lua_files) do
-  require(lua_file).mappings(map, opts)
+  for _, file in ipairs(files) do
+    file = string.sub(file, string.find(configs, suffix) + 5, string.len(file) - 4)
+    file = file:gsub("\\", ".")
+
+    local ok, customConfig = pcall(require, file)
+    if ok and type(customConfig) == "table" and type(customConfig.mappings) == "function" then
+      customConfig.mappings(map, opts)
+    end
+  end
 end
+
+executeMappingns()
 
 return M
