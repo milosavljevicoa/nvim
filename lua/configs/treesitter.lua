@@ -7,10 +7,11 @@ function M.config()
   end
 
   local default_opts = {
-    ensure_installed = { "lua", "typescript", "scss", "python", "go", "json", "yaml", "bash" },
+    ensure_installed = { "lua", "typescript", "scss", "python", "go", "json", "yaml", "bash", "html" },
     sync_install = false,
     ignore_install = {},
     highlight = {
+      disable = { "html" },
       enable = true,
       additional_vim_regex_highlighting = false,
     },

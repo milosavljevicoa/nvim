@@ -52,11 +52,18 @@ end
 
 function M.mappings(map, opts)
   map("n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
-  map("n", "gca", "<cmd>Lspsaga code_action<CR>", opts)
-  map("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
+  map("n", "CA", "<cmd>Lspsaga code_action<CR>", opts)
+  map("n", "GD", "<cmd>Lspsaga preview_definition<CR>", opts)
   map("n", "rn", "<cmd>Lspsaga rename<CR>", opts)
+
+  map("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
+  map("n", "gK", "<cmd>Lspsaga signature_help<CR>", opts)
+
   map("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
   map("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
+
+  map("n", "<C-f>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>", opts)
+  map("n", "<C-b>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>", opts)
 end
 
 return M
