@@ -45,15 +45,6 @@ packer.startup {
       end,
     }
 
-    -- Bufferline
-    use {
-      "akinsho/bufferline.nvim",
-      after = "nvim-web-devicons",
-      config = function()
-        require("configs.bufferline").config()
-      end,
-    }
-
     -- File explorer
     use {
       "kyazdani42/nvim-tree.lua",
@@ -70,7 +61,7 @@ packer.startup {
       end,
     }
 
-    -- Syntax highlighting
+    -- Tree sitter
     use {
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
