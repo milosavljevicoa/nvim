@@ -24,7 +24,7 @@ function M.config()
 end
 
 function M.mappings(map, opts)
-  map("n", "<leader>fr", "lua vim.lsp.buf.formatting()", opts)
+  map("n", "<leader>fr", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
 return M

@@ -90,6 +90,10 @@ packer.startup {
           "JoosepAlviste/nvim-ts-context-commentstring",
           after = "nvim-treesitter",
         },
+        {
+          "nvim-treesitter/playground",
+          after = "nvim-treesitter",
+        }
       },
     }
 

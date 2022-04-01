@@ -23,18 +23,19 @@ function M.config()
           n = {
             ["<C-x>"] = "delete_buffer",
           }
-        }
-      }
+        },
+      },
     },
     defaults = {
       prompt_prefix = " ",
       selection_caret = "❯ ",
       path_display = { "truncate" },
-      file_ignore_patterns = { 'build', 'tags', 'autoload', 'git', 'plugged', 'node_modules' },
+      file_ignore_patterns = { 'build', 'tags', 'autoload', 'git', 'plugged', 'node_modules', "README" },
       file_sorter = require("telescope.sorters").get_fzy_sorter,
       file_previewer = previewers.vim_buffer_cat.new,
       grep_previewer = previewers.vim_buffer_vimgrep.new,
       qflist_previewer = previewers.vim_buffer_qflist.new,
+      layout_config = { height = 0.9, width = 0.9 },
       mappings = {
         i = {
           ["<C-c>"] = actions.close,
@@ -45,6 +46,7 @@ function M.config()
           ["<C-c>"] = actions.close,
           ["<Esc>"] = actions.close,
           ["<C-x>"] = false,
+          ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
         },
       },
     },
@@ -52,7 +54,7 @@ function M.config()
       fzy_native = {
         override_generic_sorter = false,
         override_file_sorter = true,
-      }
+      },
     },
   }
 end
@@ -67,10 +69,10 @@ end
 
 function M.mappings(map, opts)
   map("n", "<leader>tf", "<cmd>Telescope live_grep<CR>", opts)
-  map("n", "<leader>gs", "<cmd>Telescope git_status<CR>", opts)
-  map("n", "<leader>gc", "<cmd>Telescope git_commits<CR>", opts)
   map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
   map("n", "<leader>bl", "<cmd>Telescope buffers<CR>", opts)
+  map("n", "<leader>ts", "<cmd>Telescope current_buffer_fuzzy_find<CR>", opts)
+  map("n", "<leader>fj", "<cmd>Telescope jumplist<CR>", opts)
   map("n", "<leader>vrc", "<cmd>lua require('configs.telescope').search_nvim()<CR>", opts)
 end
 

@@ -21,8 +21,9 @@ map("v", "/", "<ESC>/\\%V", opts)
 map("n", "<leader>'", ":noh<CR>", opts)
 
 -- Copy and paste
-map("v", "<C-c>", '"+y', opts)
+map("v", "<leader>cc", '"+y', opts)
 map("i", "<C-v>", '<Esc>\"+p', opts)
+map("n", "<C-v>", '\"+p', opts)
 
 -- Resize with arrows
 map("n", "<C-Up>", "<cmd>resize -2<CR>", opts)
@@ -36,13 +37,12 @@ map("n", "<leader>bp", "<cmd>bprevious<CR>", opts)
 map("n", "<leader>bd", "<cmd>bdelete<CR>", opts)
 
 -- Move text up and down
-map("n", "<A-j>", "<Esc><cmd>m .+1<CR>==gi", opts)
-map("n", "<A-k>", "<Esc><cmd>m .-2<CR>==gi", opts)
+map("n", "<A-j>", "<Esc><cmd>m .+1<CR>", opts)
+map("n", "<A-k>", "<Esc><cmd>m .-2<CR>", opts)
 
 -- Stay in indent mode
 map("v", "<", "<gv", opts)
 map("v", ">", ">gv", opts)
-
 
 -- File switcher
 -- Angular
@@ -55,7 +55,7 @@ local executeMappingns = function()
   local scan = require 'plenary.scandir'
 
   local suffix = "\\lua\\configs"
-  local configs = vim.fn.stdpath "config" ..suffix
+  local configs = vim.fn.stdpath "config" .. suffix
   local files = scan.scan_dir(configs, { hidden = false, depth = 2 })
 
   for _, file in ipairs(files) do
