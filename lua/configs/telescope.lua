@@ -58,6 +58,7 @@ function M.config()
     },
   }
 end
+-- lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ layout_config = { height = 0.9, width = 0.9} }))
 
 M.search_nvim = function()
   require("telescope.builtin").find_files({

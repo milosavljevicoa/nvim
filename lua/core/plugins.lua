@@ -179,8 +179,8 @@ packer.startup {
     use {
       "simrat39/symbols-outline.nvim",
       cmd = "SymbolsOutline",
-      setup = function()
-        require("configs.symbols-outline").setup()
+      conifg = function()
+        require("configs.symbols-outline").conifg()
       end,
     }
 
@@ -239,7 +239,12 @@ packer.startup {
     use "milosavljevicoa/switcher.nvim"
 
     -- gruvbox-material
-    use "sainnhe/gruvbox-material"
+    use {
+      "sainnhe/gruvbox-material",
+      config = function ()
+        vim.cmd([[colorscheme gruvbox-material]])
+      end
+    }
 
     -- Harpoon
     use {
