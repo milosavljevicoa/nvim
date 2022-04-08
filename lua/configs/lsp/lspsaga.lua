@@ -8,7 +8,7 @@ function M.config()
 
   lspsaga.setup {
     debug = false,
-    use_saga_diagnostic_sign = false,
+    use_saga_diagnostic_sign = true,
     -- Diagnostics
     error_sign = "",
     warn_sign = "",
@@ -39,7 +39,7 @@ function M.config()
       exec = "<CR>",
     },
     rename_action_keys = {
-      quit = "<C-c>",
+      quit = "<Esc>",
       exec = "<CR>",
     },
     definition_preview_icon = "  ",

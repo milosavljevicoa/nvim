@@ -61,6 +61,15 @@ packer.startup {
       end,
     }
 
+    -- Debugger
+    -- [TODO]: Test out how does this work
+    use {
+      "rcarriga/nvim-dap-ui",
+      requires = {
+        "mfussenegger/nvim-dap"
+      } 
+    }
+
     -- Tree sitter
     use {
       "nvim-treesitter/nvim-treesitter",
