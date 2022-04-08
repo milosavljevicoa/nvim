@@ -71,7 +71,7 @@ function M.config()
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
       ["<CR>"] = cmp.mapping.confirm { select = true },
       -- https://github.com/hrsh7th/nvim-cmp/issues/429
-      ["<C-k>"] = cmp.mapping({
+      ["<C-e>"] = cmp.mapping({
         i = function()
           if cmp.visible() then
             cmp.abort()
@@ -94,10 +94,6 @@ function M.config()
         },
         { "i", "c" }
       ),
-      ["<C-e>"] = cmp.mapping {
-        i = cmp.mapping.abort(),
-        c = cmp.mapping.close(),
-      },
     },
   }
 end

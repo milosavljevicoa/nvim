@@ -90,7 +90,13 @@ function M.config()
       folder_arrows = 0,
       tree_width = 30,
     },
+    actions = {
+      open_file = {
+        quit_on_open = true,
+      }
+    }
   }
+
 end
 
 function M.mappings(map, opts)

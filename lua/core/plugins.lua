@@ -175,15 +175,6 @@ packer.startup {
       end,
     }
 
-    -- LSP symbols
-    use {
-      "simrat39/symbols-outline.nvim",
-      cmd = "SymbolsOutline",
-      conifg = function()
-        require("configs.symbols-outline").conifg()
-      end,
-    }
-
     -- Formatting and linting
     use {
       "jose-elias-alvarez/null-ls.nvim",
