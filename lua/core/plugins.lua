@@ -241,7 +241,12 @@ packer.startup {
     -- gruvbox-material
     use {
       "sainnhe/gruvbox-material",
+      -- since virtual text highlighting is mannualy set I need to stop it from updating to keep the change
+      lock = true,
       config = function ()
+        -- not working
+        -- vim.cmd([[let g:gruvbox_material_diagnostic_virtual_text='colored']])
+        -- vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
         vim.cmd([[colorscheme gruvbox-material]])
       end
     }

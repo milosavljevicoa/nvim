@@ -30,7 +30,7 @@ function M.config()
       prompt_prefix = " ",
       selection_caret = "❯ ",
       path_display = { "truncate" },
-      file_ignore_patterns = { 'build', 'tags', 'autoload', 'git', 'plugged', 'node_modules', "README" },
+      file_ignore_patterns = { 'build', 'tags', 'autoload', '.git', 'plugged', 'node_modules', "README" },
       file_sorter = require("telescope.sorters").get_fzy_sorter,
       file_previewer = previewers.vim_buffer_cat.new,
       grep_previewer = previewers.vim_buffer_vimgrep.new,
@@ -61,18 +61,16 @@ end
 -- lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ layout_config = { height = 0.9, width = 0.9} }))
 
 M.search_nvim = function()
-  require("telescope.builtin").find_files({
+  require "telescope.builtin".find_files({
     prompt_title = "< VimRC >",
     cwd =  "~/AppData/Local/nvim/",
-    hidden = true,
   })
 end
 
 M.find_siblings_child_files = function ()
-  require('telescope.builtin').find_files({
+  require "telescope.builtin".find_files({
     prompt_title = "Find siblings and child files",
-    cwd = vim.fn.expand('%:p:h') ,
-    hidden = true,
+    cwd = vim.fn.expand('%:p:h'),
   })
 end
 

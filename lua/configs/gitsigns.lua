@@ -60,4 +60,9 @@ function M.config()
   }
 end
 
+function M.mappings(map, opts)
+  map("n", "GJ", "<cmd>Gitsigns next_hunk<CR>", opts)
+  map("n", "GK", "<cmdGitsigns prev_hunk<CR>", opts)
+end
+
 return M
