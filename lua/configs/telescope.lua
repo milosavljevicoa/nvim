@@ -80,6 +80,7 @@ function M.mappings(map, opts)
   map("n", "<leader>bl", "<cmd>Telescope buffers<CR>", opts)
   map("n", "<leader>ts", "<cmd>Telescope current_buffer_fuzzy_find<CR>", opts)
   map("n", "<leader>o", "<cmd>Telescope lsp_document_symbols<CR>", opts)
+  map("n", "<leader>fs", "<cmd>Telescope git_status<CR>", opts)
   map("n", "<leader>fc", "<cmd>lua require('configs.telescope').find_siblings_child_files()<CR>", opts)
   map("n", "<leader>vrc", "<cmd>lua require('configs.telescope').search_nvim()<CR>", opts)
 end

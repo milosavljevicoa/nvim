@@ -17,7 +17,7 @@ function M.config()
   null_ls.setup {
     debug = false,
     sources = {
-      diagnostics.eslint,
+      -- diagnostics.eslint,
       formatting.stylua,
       formatting.prettier,
     },

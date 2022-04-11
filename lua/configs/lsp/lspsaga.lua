@@ -8,7 +8,7 @@ function M.config()
 
   lspsaga.setup {
     debug = false,
-    use_saga_diagnostic_sign = true,
+    -- use_saga_diagnostic_sign = true,
     -- Diagnostics
     error_sign = "",
     warn_sign = "",
