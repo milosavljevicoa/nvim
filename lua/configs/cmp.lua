@@ -49,8 +49,10 @@ function M.config()
       behavior = cmp.ConfirmBehavior.Replace,
       select = false,
     },
-    documentation = {
-      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    window = {
+      documentation = {
+        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+      },
     },
     experimental = {
       ghost_text = true,

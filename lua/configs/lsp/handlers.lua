@@ -1,5 +1,8 @@
 local M = {}
 
+local nmap = require("core.utils").nmap
+local imap = require("core.utils").imap
+
 function M.setup()
   local signs = {
     { name = "DiagnosticSignError", text = "" },
@@ -12,7 +15,7 @@ function M.setup()
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
   end
 
-  local config = {
+  vim.diagnostic.config({
     virtual_text = true,
     -- signs = true,
     update_in_insert = true,
@@ -25,67 +28,70 @@ function M.setup()
       source = "always",
       header = "",
       prefix = "",
-    },
-  }
-
-  vim.diagnostic.config(config)
-
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded",
+    }
   })
-
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "rounded",
-  })
-end
-
-local function lsp_highlight_document(client)
-  if client.resolved_capabilities.document_highlight then
-    vim.api.nvim_exec(
-      [[
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]],
-      false
-    )
-  end
 end
 
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+  nmap("gd", vim.lsp.buf.definition, opts)
+  nmap("gD", vim.lsp.buf.declaration, opts)
+  nmap("gi", vim.lsp.buf.implementation, opts)
+  nmap("gr", vim.lsp.buf.references, opts)
+  nmap("GD", vim.lsp.buf.type_definition, opts)
+  nmap("K", vim.lsp.buf.hover, opts)
 
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>p", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  nmap('<space>rn', vim.lsp.buf.rename, opts)
+  nmap('<space>ca', vim.lsp.buf.code_action, opts)
+  nmap('<space>f', vim.lsp.buf.formatting, opts)
+
+  nmap("gl", vim.diagnostic.open_float, opts)
+  nmap("gj", vim.lsp.diagnostic.goto_next, opts)
+  nmap("gk", vim.lsp.diagnostic.goto_prev, opts)
+end
+
+local function lsp_highlight_document(client)
+  if client.resolved_capabilities.document_highlight then
+    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
+    vim.api.nvim_create_autocmd("CursorHold", {
+      group = "lsp_document_highlight",
+      pattern = "<buffer>",
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd("CursorMoved", {
+      group = "lsp_document_highlight",
+      pattern = "<buffer>",
+      callback = vim.lsp.buf.clear_references,
+    })
+  end
 end
 
 M.on_attach = function(client, bufnr)
-  if client.name == "tsserver" then
-    client.resolved_capabilities.document_formatting = false
+  if client.name == "tsserver" or client.name == "jsonls" or client.name == "html" or client.name == "sumneko_lua" then
+    client.server_capabilities.document_formatting = false
   end
-  if client.name == "jsonls" then
-    client.resolved_capabilities.document_formatting = false
-  end
-  if client.name == "html" then
-    client.resolved_capabilities.document_formatting = false
-  end
+
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
-  return
-end
-
-M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+M.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- M.capabilities = vim.lsp.protocol.make_client_capabilities()
+-- M.capabilities.textDocument.completion.completionItem.documentationFormat = { "markdown", "plaintext" }
+-- M.capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- M.capabilities.textDocument.completion.completionItem.preselectSupport = true
+-- M.capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+-- M.capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+-- M.capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+-- M.capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+-- M.capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+-- M.capabilities.textDocument.completion.completionItem.resolveSupport = {
+--   properties = {
+--     "documentation",
+--     "detail",
+--     "additionalTextEdits",
+--   },
+-- }
+-- M.capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 
 return M

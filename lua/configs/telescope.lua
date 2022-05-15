@@ -45,6 +45,7 @@ function M.config()
         n = {
           ["<C-c>"] = actions.close,
           ["<Esc>"] = actions.close,
+          ["q"] = actions.close,
           ["<C-x>"] = false,
           ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
         },

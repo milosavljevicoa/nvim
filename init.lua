@@ -4,8 +4,6 @@ utils.disabled_builtins()
 
 utils.bootstrap()
 
-utils.impatient()
-
 local sources = {
   "core.options",
   "core.autocmds",
@@ -19,6 +17,3 @@ for _, source in ipairs(sources) do
     error("Failed to load " .. source .. "\n\n" .. fault)
   end
 end
-
--- keep this last:
-utils.compiled()

@@ -11,31 +11,20 @@ packer.startup {
     -- Plugin manager
     use "wbthomason/packer.nvim"
 
-    -- Optimiser
-    use "lewis6991/impatient.nvim"
-
     -- Lua functions
     use "nvim-lua/plenary.nvim"
 
     -- Popup API
     use "nvim-lua/popup.nvim"
 
-    -- Boost startup time
-    use {
-      "nathom/filetype.nvim",
-      config = function()
-        vim.g.did_load_filetypes = 1
-      end,
-    }
-
     -- Cursorhold fix
-    use {
-      "antoinemadec/FixCursorHold.nvim",
-      event = "BufRead",
-      config = function()
-        vim.g.cursorhold_updatetime = 100
-      end,
-    }
+    -- use {
+    --   "antoinemadec/FixCursorHold.nvim",
+    --   event = "BufRead",
+    --   config = function()
+    --     vim.g.cursorhold_updatetime = 100
+    --   end,
+    -- }
 
     -- Icons
     use {
@@ -75,16 +64,6 @@ packer.startup {
       "nvim-treesitter/nvim-treesitter",
       run = ":TSUpdate",
       event = "BufRead",
-      cmd = {
-        "TSInstall",
-        "TSInstallInfo",
-        "TSInstallSync",
-        "TSUninstall",
-        "TSUpdate",
-        "TSUpdateSync",
-        "TSDisableAll",
-        "TSEnableAll",
-      },
       config = function()
         require("configs.treesitter").config()
       end,
@@ -145,6 +124,7 @@ packer.startup {
       after = "nvim-cmp",
     }
 
+    -- Pictorgrams for lsp
     use "onsails/lspkind-nvim"
 
     -- LSP completion source
@@ -153,35 +133,12 @@ packer.startup {
     -- LSP manager
     use {
       "williamboman/nvim-lsp-installer",
-      event = "BufRead",
-      cmd = {
-        "LspInstall",
-        "LspInstallInfo",
-        "LspPrintInstalled",
-        "LspRestart",
-        "LspStart",
-        "LspStop",
-        "LspUninstall",
-        "LspUninstallAll",
-      },
-    }
-
-    -- Built-in LSP
-    use {
-      "neovim/nvim-lspconfig",
-      event = "BufRead",
-      config = function()
-        require "configs.lsp"
-      end,
-    }
-
-    -- LSP enhancer
-    use {
-      "tami5/lspsaga.nvim",
-      event = "BufRead",
-      config = function()
-        require("configs.lsp.lspsaga").config()
-      end,
+      {
+        "neovim/nvim-lspconfig",
+        config = function()
+          require("configs.lsp")
+        end,
+      }
     }
 
     -- Formatting and linting
@@ -259,24 +216,6 @@ packer.startup {
       end,
     }
   end,
-
-  config = {
-    compile_path = vim.fn.stdpath "config" .. "/lua/packer_compiled.lua",
-    display = {
-      open_fn = function()
-        return require("packer.util").float { border = "rounded" }
-      end,
-    },
-    profile = {
-      enable = true,
-      threshold = 0.0001,
-    },
-    git = {
-      clone_timeout = 300,
-    },
-    auto_clean = true,
-    compile_on_sync = true,
-  },
 }
 
 return M
