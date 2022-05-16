@@ -54,6 +54,7 @@ packer.startup {
     -- [TODO]: Test out how does this work
     use {
       "rcarriga/nvim-dap-ui",
+      "nvim-dap-python",
       requires = {
         "mfussenegger/nvim-dap"
       } 
