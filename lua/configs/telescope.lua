@@ -3,6 +3,7 @@ local M = {}
 function M.config()
   local status_ok, telescope = pcall(require, "telescope")
   if not status_ok then
+    error("Telescope not found")
     return
   end
 
@@ -62,14 +63,14 @@ end
 -- lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ layout_config = { height = 0.9, width = 0.9} }))
 
 M.search_nvim = function()
-  require "telescope.builtin".find_files({
+  require("telescope.builtin")find_files({
     prompt_title = "< VimRC >",
     cwd =  "~/AppData/Local/nvim/",
   })
 end
 
 M.find_siblings_child_files = function ()
-  require "telescope.builtin".find_files({
+  require("telescope.builtin")find_files({
     prompt_title = "Find siblings and child files",
     cwd = vim.fn.expand('%:p:h'),
   })

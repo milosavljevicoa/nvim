@@ -21,6 +21,8 @@ function M.config()
   cmp.setup {
     formatting = {
       format = lspkind.cmp_format {
+        mode = 'symbol',
+        maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
         with_text = true,
         menu = {
           buffer = "[buf]",
@@ -38,38 +40,31 @@ function M.config()
         luasnip.lsp_expand(args.body)
       end,
     },
-    duplicates = {
-      nvim_lsp = 1,
-      luasnip = 1,
-      cmp_tabnine = 1,
-      buffer = 1,
-      path = 1,
-    },
-    confirm_opts = {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = false,
-    },
     window = {
-      documentation = {
-        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-      },
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
     },
+    -- duplicates = {
+    --   nvim_lsp = 1,
+    --   luasnip = 1,
+    --   cmp_tabnine = 1,
+    --   buffer = 1,
+    --   path = 1,
+    -- },
     experimental = {
       ghost_text = true,
       native_menu = false,
     },
-    completion = {
-      keyword_length = 1,
-    },
     sources = {
       { name = "nvim_lsp" },
       { name = "luasnip" },
-      { name = "buffer" },
+      { name = "buffer", keyword_length = 3 },
       { name = "path" },
     },
     mapping = {
+      ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
+      ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
       ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
       ["<CR>"] = cmp.mapping.confirm { select = true },
       -- https://github.com/hrsh7th/nvim-cmp/issues/429

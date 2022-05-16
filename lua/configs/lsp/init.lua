@@ -10,7 +10,6 @@
     return
   end
   lsp_installer.setup {}
-  local tbl_deep_extend = vim.tbl_deep_extend
   local handlers = require "configs.lsp.handlers"
   handlers.setup()
 
@@ -26,11 +25,11 @@
       on_attach = function(client, bufnr)
         handlers.on_attach(client, bufnr)
       end,
-      capabilities = tbl_deep_extend("force", handlers.capabilities, lspconfig[server].capabilities or {}),
+      capabilities = handlers.capabilities,
     }
     local present, av_overrides = pcall(require, "configs.lsp.server-settings." .. server)
     if present then
-      opts = tbl_deep_extend("force", av_overrides, opts)
+      opts = vim.tbl_deep_extend("force", av_overrides, opts)
     end
     lspconfig[server].setup(opts)
   end
