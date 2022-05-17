@@ -1,4 +1,3 @@
----@diagnostic disable: undefined-global
 local M = {}
 
 local packer_status_ok, packer = pcall(require, "packer")
@@ -57,7 +56,7 @@ packer.startup {
       "nvim-dap-python",
       requires = {
         "mfussenegger/nvim-dap"
-      } 
+      }
     }
 
     -- Tree sitter
@@ -80,6 +79,7 @@ packer.startup {
           after = "nvim-treesitter",
         },
         {
+          -- Treesitter Playground
           "nvim-treesitter/playground",
           after = "nvim-treesitter",
         }
@@ -199,12 +199,9 @@ packer.startup {
     -- gruvbox-material
     use {
       "sainnhe/gruvbox-material",
-      -- since virtual text highlighting is mannualy set I need to stop it from updating to keep the change
-      lock = true,
       config = function ()
-        -- not working
-        -- vim.cmd([[let g:gruvbox_material_diagnostic_virtual_text='colored']])
-        -- vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
+        vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
+        vim.g.gruvbox_material_disable_italic_comment = 1
         vim.cmd([[colorscheme gruvbox-material]])
       end
     }
