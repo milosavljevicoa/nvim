@@ -49,6 +49,8 @@ packer.startup {
       end,
     }
 
+    use { "mfussenegger/nvim-dap" }
+
     -- Debugger
     -- [TODO]: Test out how does this work
     use {
@@ -69,7 +71,7 @@ packer.startup {
       end,
       requires = {
         {
-          -- Autoclose tags
+          -- Use treesitter to auto close and auto rename html tag
           "windwp/nvim-ts-autotag",
           after = "nvim-treesitter",
         },
@@ -82,7 +84,16 @@ packer.startup {
           -- Treesitter Playground
           "nvim-treesitter/playground",
           after = "nvim-treesitter",
+        },
+        {
+          -- Code context
+          "nvim-treesitter/nvim-treesitter-context",
+          after = "nvim-treesitter",
+          config = function ()
+            require("configs.treesitter-context").config()
+          end
         }
+
       },
     }
 
@@ -97,6 +108,9 @@ packer.startup {
         "rafamadriz/friendly-snippets",
       },
     }
+
+    -- TabNine
+    -- https://github.com/tzachar/cmp-tabnine
 
     -- Completion engine
     use {
