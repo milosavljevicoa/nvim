@@ -64,19 +64,19 @@ function M.config()
 end
 -- lua require'telescope.builtin'.find_files(require('telescope.themes').get_dropdown({ layout_config = { height = 0.9, width = 0.9} }))
 
-M.search_nvim = function()
-  require("telescope.builtin").find_files({
-    prompt_title = "< VimRC >",
-    cwd =  "~/AppData/Local/nvim/",
-  })
-end
+-- M.search_nvim = function()
+--   require("telescope.builtin").find_files({
+--     prompt_title = "< VimRC >",
+--     cwd =  "~/AppData/Local/nvim/",
+--   })
+-- end
 
-M.find_siblings_child_files = function ()
-  require("telescope.builtin").find_files({
-    prompt_title = "Find siblings and child files",
-    cwd = vim.fn.expand('%:p:h'),
-  })
-end
+-- M.find_siblings_child_files = function ()
+--   require("telescope.builtin").find_files({
+--     prompt_title = "Find siblings and child files",
+--     cwd = vim.fn.expand('%:p:h'),
+--   })
+-- end
 
 function M.mappings(map, opts)
   map("n", "<leader>tf", "<cmd>Telescope live_grep<CR>", opts)
@@ -87,8 +87,8 @@ function M.mappings(map, opts)
   map("n", "<leader>fs", "<cmd>Telescope git_status<CR>", opts)
   map("n", "<leader>htg", "<cmd>Telescope help_tags<CR>", opts)
 
-  nmap("<leader>fc", M.find_siblings_child_files, opts)
-  nmap("<leader>vrc", M.search_nvim(), opts)
+  -- nmap("<leader>fc", M.find_siblings_child_files, opts)
+  -- nmap("<leader>vrc", M.search_nvim(), opts)
 end
 
 return M

@@ -2,6 +2,8 @@ local M = {}
 
 local set = vim.opt
 
+local numberOfLines = 4
+
 set.fileencoding = "utf-8" -- File content encoding for the buffer
 set.spelllang = "en" -- Support US english
 set.mouse = "a" -- Enable mouse support
@@ -30,13 +32,16 @@ set.relativenumber = true -- Show relative numberline
 set.wrap = false -- Disable wrapping of lines longer than the width of window
 set.conceallevel = 0 -- Show text normally
 set.cmdheight = 2 -- Number of screen lines to use for the command line
-set.shiftwidth = 2 -- Number of space inserted for indentation
-set.tabstop = 2 -- Number of space in a tab
-set.scrolloff = 4 -- Number of lines to keep above and below the cursor
-set.sidescrolloff = 4 -- Number of columns to keep at the sides of the cursor
+set.shiftwidth = numberOfLines -- Number of space inserted for indentation
+set.tabstop = numberOfLines -- Number of space in a tab
+set.scrolloff = numberOfLines -- Number of lines to keep above and below the cursor
+set.sidescrolloff = numberOfLines -- Number of columns to keep at the sides of the cursor
 set.pumheight = 10 -- Height of the pop up menu
 set.history = 100 -- Number of commands to remember in a history table
 set.timeoutlen = 500 -- Length of time to wait for a mapped sequence
 set.updatetime = 300 -- Length of time to wait before triggering the plugin
+
+
+
 
 return M

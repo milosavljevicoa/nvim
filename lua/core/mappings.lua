@@ -58,13 +58,12 @@ map("n", "<A-s>", "<cmd>lua require('switcher').switch_to('scss', 'spec')<CR>", 
 local executeMappingns = function()
   local scan = require 'plenary.scandir'
 
-  local suffix = "\\lua\\configs"
+  local suffix = "/lua/configs"
   local configs = vim.fn.stdpath "config" .. suffix
   local files = scan.scan_dir(configs, { hidden = false, depth = 2 })
 
   for _, file in ipairs(files) do
     file = string.sub(file, string.find(configs, suffix) + 5, string.len(file) - 4)
-    file = file:gsub("\\", ".")
 
     local ok, customConfig = pcall(require, file)
     if ok and type(customConfig) == "table" and type(customConfig.mappings) == "function" then

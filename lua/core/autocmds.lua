@@ -9,4 +9,6 @@ vim.cmd [[
 
 vim.cmd [[autocmd FileType harpoon setlocal wrap]]
 
+vim.cmd [[autocmd FileType lua setlocal ts=2 sw=2 expandtab]]
+
 return M

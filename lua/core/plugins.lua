@@ -2,6 +2,7 @@ local M = {}
 
 local packer_status_ok, packer = pcall(require, "packer")
 if not packer_status_ok then
+  print "Packer not installed"
   return
 end
 
@@ -16,14 +17,10 @@ packer.startup {
     -- Popup API
     use "nvim-lua/popup.nvim"
 
-    -- Cursorhold fix
-    -- use {
-    --   "antoinemadec/FixCursorHold.nvim",
-    --   event = "BufRead",
-    --   config = function()
-    --     vim.g.cursorhold_updatetime = 100
-    --   end,
-    -- }
+    -- Undotree
+    use {
+      "mbbill/undotree",
+    }
 
     -- Icons
     use {
@@ -49,13 +46,18 @@ packer.startup {
       end,
     }
 
-    use { "mfussenegger/nvim-dap" }
+    use {
+      "mfussenegger/nvim-dap",
+      config = function()
+        require("configs.nvim-dap").config()
+      end,
+    }
 
     -- Debugger
     -- [TODO]: Test out how does this work
     use {
       "rcarriga/nvim-dap-ui",
-      "nvim-dap-python",
+      -- "nvim-dap-python",
       requires = {
         "mfussenegger/nvim-dap"
       }
