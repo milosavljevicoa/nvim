@@ -57,9 +57,10 @@ map("n", "<A-s>", "<cmd>lua require('switcher').switch_to('scss', 'spec')<CR>", 
 
 local executeMappingns = function()
   local scan = require 'plenary.scandir'
+  local utils = require 'core.utils'
 
-  local suffix = "/lua/configs"
-  local configs = vim.fn.stdpath "config" .. suffix
+  local suffix = utils.makePath({'lua', 'configs'})
+  local configs = vim.fn.stdpath 'config' .. suffix
   local files = scan.scan_dir(configs, { hidden = false, depth = 2 })
 
   for _, file in ipairs(files) do

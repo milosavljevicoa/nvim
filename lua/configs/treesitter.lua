@@ -7,7 +7,7 @@ function M.config()
   end
 
   local default_opts = {
-    ensure_installed = { "lua", "typescript", "scss", "python", "go", "json", "yaml", "html", "query" },
+    ensure_installed = { "lua", "typescript", "javascript", "css", "scss", "python", "go", "json", "yaml", "html", "query" },
     sync_install = false,
     ignore_install = {},
     highlight = {

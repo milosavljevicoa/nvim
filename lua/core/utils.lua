@@ -38,18 +38,37 @@ function M.disabled_builtins()
   g.loaded_remote_plugins = false
 end
 
+function M.getPathConcatenator()
+  local sysname = string.lower(vim.loop.os_uname().sysname)
+  if string.match(sysname, 'windows') then
+    return '\\'
+  else
+    return '/'
+  end
+end
+
+function M.makePath(paths)
+  local concatonator = M.getPathConcatenator()
+  local returnPath = ""
+  for _, path in ipairs(paths) do
+    returnPath = returnPath .. concatonator .. path
+  end
+  return returnPath
+end
+
+
 M.imap = function(keymap, handler, opts)
   if not opts then
     opts = {}
   end
-  vim.keymap.set("i", keymap, handler, opts)
+  vim.keymap.set('i', keymap, handler, opts)
 end
 
 M.nmap = function(keymap, handler, opts)
   if not opts then
     opts = {}
   end
-  vim.keymap.set("n", keymap, handler, opts)
+  vim.keymap.set('n', keymap, handler, opts)
 end
 
 return M

@@ -1,7 +1,5 @@
 local M = {}
 
-local nmap = require("core.utils").nmap
-
 function M.config()
   local status_ok, telescope = pcall(require, "telescope")
   if not status_ok then

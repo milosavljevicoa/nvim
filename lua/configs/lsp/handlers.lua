@@ -37,24 +37,24 @@ end
 
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
-  nmap("gd", vim.lsp.buf.definition, opts)
-  nmap("gD", vim.lsp.buf.declaration, opts)
-  nmap("gi", vim.lsp.buf.implementation, opts)
-  nmap("gr", vim.lsp.buf.references, opts)
-  nmap("GD", vim.lsp.buf.type_definition, opts)
-  nmap("K", vim.lsp.buf.hover, opts)
+  nmap('gd', vim.lsp.buf.definition, opts)
+  nmap('gD', vim.lsp.buf.declaration, opts)
+  nmap('gi', vim.lsp.buf.implementation, opts)
+  nmap('gr', vim.lsp.buf.references, opts)
+  nmap('GD', vim.lsp.buf.type_definition, opts)
+  nmap('K', vim.lsp.buf.hover, opts)
 
   nmap('<space>rn', vim.lsp.buf.rename, opts)
   nmap('<space>ca', vim.lsp.buf.code_action, opts)
   nmap('<space>f', vim.lsp.buf.formatting, opts)
 
-  nmap("gl", vim.diagnostic.open_float, opts)
-  nmap("gj", vim.lsp.diagnostic.goto_next, opts)
-  nmap("gk", vim.lsp.diagnostic.goto_prev, opts)
+  nmap('gl', vim.diagnostic.open_float, opts)
+  nmap('gj', vim.diagnostic.goto_next, opts)
+  nmap('gk', vim.diagnostic.goto_prev, opts)
 end
 
 local function lsp_highlight_document(client)
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.document_highlight then
     vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
     vim.api.nvim_create_autocmd("CursorHold", {
       group = "lsp_document_highlight",

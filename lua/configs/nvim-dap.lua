@@ -2,14 +2,16 @@ local M = {}
 
 function M.config()
   local status_ok, dap = pcall(require, "dap")
+  local utils = require 'core.utils'
   if not status_ok then
     print "Dap not found..."
     return
   end
 
+  local pythonPath = utils.makePath({'.virtualenvs', 'tools', 'bin', 'python'})
   dap.adapters.python = {
     type = 'executable';
-    command = os.getenv('HOME') .. '/.virtualenvs/tools/bin/python';
+    command = os.getenv('HOME') .. pythonPath;
     args = { '-m', 'debugpy.adapter' };
   }
 
