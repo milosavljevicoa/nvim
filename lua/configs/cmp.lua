@@ -3,16 +3,19 @@ local M = {}
 function M.config()
   local cmp_status_ok, cmp = pcall(require, "cmp")
   if not cmp_status_ok then
+    error("cmp not find")
     return
   end
 
   local snip_status_ok, luasnip = pcall(require, "luasnip")
   if not snip_status_ok then
+    error("luasnip not found")
     return
   end
 
   local lspkind_status_ok, lspkind = pcall(require, "lspkind")
   if not lspkind_status_ok then
+    error("lspkind not found")
     return
   end
 
@@ -33,29 +36,28 @@ function M.config()
       completion = cmp.config.window.bordered(),
       documentation = cmp.config.window.bordered(),
     },
-    -- duplicates = {
-    --   nvim_lsp = 1,
-    --   luasnip = 1,
-    --   cmp_tabnine = 1,
-    --   buffer = 1,
-    --   path = 1,
-    -- },
     experimental = {
       ghost_text = true,
       native_menu = false,
     },
-    sources = {
-      { name = "nvim_lsp" },
-      { name = "luasnip" },
-      { name = "buffer", keyword_length = 3 },
+    sources = cmp.config.sources({
+      { name = "nvim_lsp", priority = 4 },
       { name = "path" },
-    },
+      { name = "buffer", keword_lenght = 4 },
+    }),
     mapping = {
       ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
       ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
       ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
       ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
       ["<CR>"] = cmp.mapping.confirm { select = true },
+      ['<C-s>'] = cmp.mapping.complete({
+        config = {
+          sources = {
+            { name = 'luasnip' }
+          }
+        }
+      }),
       -- https://github.com/hrsh7th/nvim-cmp/issues/429
       ["<C-e>"] = cmp.mapping({
         i = function()

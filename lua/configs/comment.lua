@@ -25,9 +25,4 @@ function M.config()
   }
 end
 
-function M.mappings(map, opts)
-  map("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
-  map("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>", opts)
-end
-
 return M

@@ -42,7 +42,7 @@ local function lsp_keymaps(bufnr)
   nmap('gi', vim.lsp.buf.implementation, opts)
   nmap('GD', vim.lsp.buf.type_definition, opts)
   nmap('<space>fr', function()
-    vim.lsp.buf.format { async = true }
+    vim.lsp.buf.formatting({ async = true })
   end, opts)
 end
 

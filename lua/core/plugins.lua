@@ -259,6 +259,12 @@ packer.startup {
       end
     }
 
+    use {
+      "simrat39/rust-tools.nvim",
+      config = function ()
+
+      end
+    }
   end,
 }
 
