@@ -15,16 +15,17 @@ function M.config()
     },
     disable_filetype = { "TelescopePrompt", "spectre_panel" },
     fast_wrap = {
-      map = "<M-e>",
+      map = "<c-m>",
       chars = { "{", "[", "(", '"', "'" },
       pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
       offset = 0,
-      end_key = "$",
+      end_key = "m",
       keys = "qwertyuiopzxcvbnmasdfghjkl",
       check_comma = true,
-      highlight = "PmenuSel",
-      highlight_grey = "LineNr",
+      highlight = "Search",
+      highlight_grey = "Comment",
     },
+    enable_check_bracket_line = false
   }
 
   local cmp_autopairs = require "nvim-autopairs.completion.cmp"

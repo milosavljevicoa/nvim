@@ -6,8 +6,21 @@ function M.config()
     return
   end
 
-  saga.init_lsp_saga()
-
+  saga.init_lsp_saga({
+    finder_action_keys = {
+      open = { 'o', '<cr>' },
+      vsplit = 'v',
+      split = 's',
+      quit = { 'q', '<ESC>', "<C-c>" },
+      --[[ scroll_down = '<C-f>', ]]
+      --[[ scroll_up = '<C-b>', ]]
+      -- quit can be a table
+    },
+    code_action_keys = {
+      quit = { 'q', '<ESC>', "<C-c>" },
+    },
+    rename_action_ = { '<C-c>', '<ESC>' },
+  })
 end
 
 function M.mappings(map, opts)

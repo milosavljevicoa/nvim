@@ -25,4 +25,14 @@ function M.config()
   }
 end
 
+--[[
+Mappings:
+normal mode:
+  gcc - single line commenting 
+  gcb - block line  commenting
+visual mode:
+  gc - single line commenting 
+  gb - block line  commenting
+]]
+
 return M
