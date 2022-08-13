@@ -16,23 +16,12 @@ function M.config()
     return
   end
 
-  lspkind.init()
-
   cmp.setup {
     formatting = {
       format = lspkind.cmp_format {
-        mode = 'symbol',
+        mode = 'symbol_text',
         maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
         with_text = true,
-        menu = {
-          buffer = "[buf]",
-          nvim_lsp = "[LSP]",
-          nvim_lua = "[api]",
-          path = "[path]",
-          luasnip = "[snip]",
-          gh_issues = "[issues]",
-          tn = "[TabNine]",
-        },
       },
     },
     snippet = {

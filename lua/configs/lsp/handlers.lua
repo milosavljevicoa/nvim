@@ -40,17 +40,10 @@ local function lsp_keymaps(bufnr)
   nmap('gd', vim.lsp.buf.definition, opts)
   nmap('gD', vim.lsp.buf.declaration, opts)
   nmap('gi', vim.lsp.buf.implementation, opts)
-  nmap('gr', vim.lsp.buf.references, opts)
   nmap('GD', vim.lsp.buf.type_definition, opts)
-  nmap('K', vim.lsp.buf.hover, opts)
-
-  nmap('<space>rn', vim.lsp.buf.rename, opts)
-  nmap('<space>ca', vim.lsp.buf.code_action, opts)
-  nmap('<space>f', vim.lsp.buf.formatting, opts)
-
-  nmap('gl', vim.diagnostic.open_float, opts)
-  nmap('gj', vim.diagnostic.goto_next, opts)
-  nmap('gk', vim.diagnostic.goto_prev, opts)
+  nmap('<space>fr', function()
+    vim.lsp.buf.format { async = true }
+  end, opts)
 end
 
 local function lsp_highlight_document(client)

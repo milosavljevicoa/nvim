@@ -8,6 +8,11 @@ end
 
 packer.startup {
   function(use)
+    -- note tracker
+    -- https://github.com/oberblastmeister/neuron.nvim
+    -- https://github.com/vimwiki/vimwiki
+    -- https://github.com/nvim-neorg/neorg
+
     -- Plugin manager
     use "wbthomason/packer.nvim"
 
@@ -46,12 +51,12 @@ packer.startup {
       end,
     }
 
-    use {
-      "mfussenegger/nvim-dap",
-      config = function()
-        require("configs.nvim-dap").config()
-      end,
-    }
+    -- use {
+    --   "mfussenegger/nvim-dap",
+    --   config = function()
+    --     require("configs.nvim-dap").config()
+    --   end,
+    -- }
 
     -- Debugger
     -- [TODO]: Test out how does this work
@@ -91,7 +96,7 @@ packer.startup {
           -- Code context
           "nvim-treesitter/nvim-treesitter-context",
           after = "nvim-treesitter",
-          config = function ()
+          config = function()
             require("configs.treesitter-context").config()
           end
         }
@@ -215,7 +220,7 @@ packer.startup {
     -- gruvbox-material
     use {
       "sainnhe/gruvbox-material",
-      config = function ()
+      config = function()
         vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
         vim.g.gruvbox_material_disable_italic_comment = 1
         vim.cmd([[colorscheme gruvbox-material]])
@@ -229,6 +234,31 @@ packer.startup {
         require("configs.harpoon").config()
       end,
     }
+
+    use {
+      "folke/zen-mode.nvim",
+      config = function()
+        require("zen-mode").setup {
+          window = {
+            backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+            width = 0.7
+            -- height and width can be:
+            -- * an absolute number of cells when > 1
+            -- * a percentage of the width / height of the editor when <= 1
+            -- * a function that returns the width or
+          }
+        }
+      end
+    }
+
+    use {
+      "glepnir/lspsaga.nvim",
+      branch = "main",
+      config = function ()
+        require("configs.lspsaga").config()
+      end
+    }
+
   end,
 }
 
