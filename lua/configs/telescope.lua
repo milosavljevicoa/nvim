@@ -19,16 +19,16 @@ function M.config()
         previewer = false,
         mappings = {
           i = {
-            ["<C-x>"] = "delete_buffer",
+            ["<C-d>"] = "delete_buffer",
           },
           n = {
-            ["<C-x>"] = "delete_buffer",
+            ["<C-d>"] = "delete_buffer",
           }
         },
       },
     },
     defaults = {
-      prompt_prefix = " ",
+      prompt_prefix = " ",
       selection_caret = "❯ ",
       path_display = { "truncate" },
       file_ignore_patterns = { 'build', 'tags', 'autoload', '.git', 'plugged', 'node_modules', "README" },
@@ -47,7 +47,6 @@ function M.config()
           ["<C-c>"] = actions.close,
           ["<Esc>"] = actions.close,
           ["q"] = actions.close,
-          ["<C-x>"] = false,
           ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
         },
       },
