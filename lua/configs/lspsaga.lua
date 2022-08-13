@@ -19,7 +19,7 @@ function M.config()
     code_action_keys = {
       quit = { 'q', '<ESC>', "<C-c>" },
     },
-    rename_action_ = { '<C-c>', '<ESC>' },
+    rename_action_quit = { '<C-c>', '<ESC>' },
   })
 end
 
