@@ -48,8 +48,6 @@ function M.config()
     mapping = cmp.mapping.preset.insert({
       ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
       ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
-      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-      ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<CR>"] = cmp.mapping.confirm { select = true },
       ['<C-s>'] = cmp.mapping.complete({
         config = {
