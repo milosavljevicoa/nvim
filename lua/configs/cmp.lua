@@ -41,15 +41,15 @@ function M.config()
       native_menu = false,
     },
     sources = cmp.config.sources({
-      { name = "nvim_lsp", priority = 4 },
+      { name = "nvim_lsp"},
       { name = "path" },
       { name = "buffer", keword_lenght = 4 },
     }),
-    mapping = {
+    mapping = cmp.mapping.preset.insert({
       ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
       ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
-      ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
+      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+      ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<CR>"] = cmp.mapping.confirm { select = true },
       ['<C-s>'] = cmp.mapping.complete({
         config = {
@@ -58,23 +58,7 @@ function M.config()
           }
         }
       }),
-      -- https://github.com/hrsh7th/nvim-cmp/issues/429
-      ["<C-e>"] = cmp.mapping({
-        i = function()
-          if cmp.visible() then
-            cmp.abort()
-          else
-            cmp.complete()
-          end
-        end,
-        c = function()
-          if cmp.visible() then
-            cmp.close()
-          else
-            cmp.complete()
-          end
-        end,
-      }),
+      ["<C-e>"] = cmp.mapping.complete(),
       ["<C-y>"] = cmp.mapping(
         cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Insert,
@@ -82,7 +66,7 @@ function M.config()
         },
         { "i", "c" }
       ),
-    },
+    }),
   }
 end
 

@@ -19,7 +19,6 @@ function M.config()
     code_action_keys = {
       quit = { 'q', '<ESC>', "<C-c>" },
     },
-    rename_action_quit = { '<C-c>', '<ESC>' },
   })
 end
 
@@ -37,9 +36,9 @@ function M.mappings(map, opts)
 
   local action = require("lspsaga.action")
   -- scroll down hover doc or scroll in definition preview
-  map("n", "<C-f>", function() action.smart_scroll_with_saga(1) end, opts)
+  map("n", "<C-f>", function() action.smart_scroll_with_saga(4) end, opts)
   -- scroll up hover doc
-  map("n", "<C-b>", function() action.smart_scroll_with_saga(-1) end, opts)
+  map("n", "<C-b>", function() action.smart_scroll_with_saga(-4) end, opts)
 
   local diagnostic = require("lspsaga.diagnostic")
   map("n", "gj", diagnostic.goto_next, opts)

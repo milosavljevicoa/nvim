@@ -14,8 +14,9 @@ function M.config()
       java = false,
     },
     disable_filetype = { "TelescopePrompt", "spectre_panel" },
+    enable_check_bracket_line = false,
     fast_wrap = {
-      map = "<c-m>",
+      map = "<c-b>",
       chars = { "{", "[", "(", '"', "'" },
       pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
       offset = 0,
@@ -24,8 +25,7 @@ function M.config()
       check_comma = true,
       highlight = "Search",
       highlight_grey = "Comment",
-    },
-    enable_check_bracket_line = false
+    }
   }
 
   local cmp_autopairs = require "nvim-autopairs.completion.cmp"
