@@ -262,9 +262,35 @@ packer.startup {
     use {
       "simrat39/rust-tools.nvim",
       config = function ()
-
+        require("configs.rust-tools").config()
       end
     }
+
+    -- Green gruvbox
+    use {
+      "sainnhe/everforest",
+      config = function()
+        vim.g.everforest_background = 'dark'
+      end
+    }
+
+    -- Git like magit
+    use {
+      "TimUntersberger/neogit",
+      requires = "nvim-lua/plenary.nvim",
+      config = function ()
+        require("configs.neogit").config()
+      end
+    }
+
+    -- Morge conflicts
+    use {
+      "akinsho/git-conflict.nvim",
+      config = function ()
+        require("git-conflict").setup()
+      end
+    }
+
   end,
 }
 

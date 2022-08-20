@@ -6,7 +6,7 @@ function M.config()
     return
   end
 
-  nvimtree.setup { -- BEGIN_DEFAULT_OPTS
+  nvimtree.setup { 
     auto_reload_on_write = true,
     disable_netrw = true,
     hijack_cursor = false,
@@ -19,7 +19,7 @@ function M.config()
     sort_by = "name",
     update_cwd = false,
     view = {
-      width = 30,
+      width = 100,
       height = 30,
       hide_root_folder = false,
       side = "left",

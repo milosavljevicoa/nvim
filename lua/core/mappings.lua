@@ -21,6 +21,7 @@ map("v", ":", ";", opts)
 --Escape
 map("i", "jk", "<Esc>", opts)
 
+-- Search inside visual
 map("v", "/", "<ESC>/\\%V", opts)
 map("n", "<leader>'", ":noh<CR>", opts)
 
@@ -35,14 +36,9 @@ map("n", "<C-Down>", "<cmd>resize +2<CR>", opts)
 map("n", "<C-Left>", "<cmd>vertical resize -2<CR>", opts)
 map("n", "<C-Right>", "<cmd>vertical resize +2<CR>", opts)
 
--- Navigate buffers
-map("n", "<leader>bn", "<cmd>bnext<CR>", opts)
-map("n", "<leader>bp", "<cmd>bprevious<CR>", opts)
-map("n", "<leader>bd", "<cmd>bdelete<CR>", opts)
-
 -- Move text up and down
-map("n", "<A-j>", "<Esc><cmd>m .+1<CR>", opts)
-map("n", "<A-k>", "<Esc><cmd>m .-2<CR>", opts)
+map("v", "J", "<Esc><cmd>m .+1<CR>gv", opts)
+map("v", "K", "<Esc><cmd>m .-2<CR>gv", opts)
 
 -- Stay in indent mode
 map("v", "<", "<gv", opts)

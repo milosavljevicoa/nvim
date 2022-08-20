@@ -12,6 +12,7 @@ set.foldmethod = "manual" -- Create folds manually
 set.completeopt = { "menu", "menuone", "noselect" } -- Options for insert mode completion
 set.colorcolumn = "99999" -- Fix for the indentline problem
 set.backup = false -- Disable making a backup file
+set.background = "dark"
 set.expandtab = true -- Enable the use of space in tab
 set.hidden = true -- Ignore unsaved buffers
 set.hlsearch = true -- Highlight all the matches of search pattern
