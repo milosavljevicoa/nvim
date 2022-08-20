@@ -251,17 +251,18 @@ packer.startup {
       end
     }
 
+    -- Prettier LSP
     use {
       "glepnir/lspsaga.nvim",
       branch = "main",
-      config = function ()
+      config = function()
         require("configs.lspsaga").config()
       end
     }
 
     use {
       "simrat39/rust-tools.nvim",
-      config = function ()
+      config = function()
         require("configs.rust-tools").config()
       end
     }
@@ -278,7 +279,7 @@ packer.startup {
     use {
       "TimUntersberger/neogit",
       requires = "nvim-lua/plenary.nvim",
-      config = function ()
+      config = function()
         require("configs.neogit").config()
       end
     }
@@ -286,11 +287,17 @@ packer.startup {
     -- Morge conflicts
     use {
       "akinsho/git-conflict.nvim",
-      config = function ()
+      config = function()
         require("git-conflict").setup()
       end
     }
 
+    use {
+      'phaazon/hop.nvim',
+      config = function()
+        require("configs.hop").config()
+      end
+    }
   end,
 }
 
