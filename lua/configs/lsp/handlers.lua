@@ -1,7 +1,6 @@
 local M = {}
 
 local nmap = require("core.utils").nmap
-local imap = require("core.utils").imap
 
 function M.setup()
   local signs = {
@@ -35,7 +34,7 @@ function M.setup()
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 end
 
-local function lsp_keymaps(bufnr)
+local function lsp_keymaps()
   local opts = { noremap = true, silent = true }
   nmap('gd', vim.lsp.buf.definition, opts)
   nmap('gD', vim.lsp.buf.declaration, opts)
@@ -46,28 +45,12 @@ local function lsp_keymaps(bufnr)
   end, opts)
 end
 
-local function lsp_highlight_document(client)
-  if client.server_capabilities.document_highlight then
-    vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-    vim.api.nvim_create_autocmd("CursorHold", {
-      group = "lsp_document_highlight",
-      pattern = "<buffer>",
-      callback = vim.lsp.buf.document_highlight,
-    })
-    vim.api.nvim_create_autocmd("CursorMoved", {
-      group = "lsp_document_highlight",
-      pattern = "<buffer>",
-      callback = vim.lsp.buf.clear_references,
-    })
-  end
-end
-
-M.on_attach = function(client, bufnr)
+M.on_attach = function(client)
   if client.name == "tsserver" or client.name == "jsonls" or client.name == "html" or client.name == "sumneko_lua" then
     client.server_capabilities.document_formatting = false
   end
 
-  lsp_keymaps(bufnr)
+  lsp_keymaps()
 end
 
 M.capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
