@@ -20,6 +20,9 @@ function M.config()
   end
 
   cmp.setup {
+    performance = {
+      debounce = 150,
+    },
     formatting = {
       format = lspkind.cmp_format {
         mode = 'symbol_text',
@@ -41,7 +44,7 @@ function M.config()
       native_menu = false,
     },
     sources = cmp.config.sources({
-      { name = "nvim_lsp"},
+      { name = "nvim_lsp" },
       { name = "path" },
       { name = "buffer", keword_lenght = 4 },
     }),
@@ -50,6 +53,7 @@ function M.config()
       ['<C-m>'] = cmp.mapping.scroll_docs(4),
       ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
       ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+      ["<C-Space>"] = cmp.mapping.complete(),
       ["<CR>"] = cmp.mapping.confirm { select = true },
       ['<C-s>'] = cmp.mapping.complete({
         config = {
@@ -59,13 +63,12 @@ function M.config()
         }
       }),
       ["<C-e>"] = cmp.mapping.complete(),
-      ["<C-y>"] = cmp.mapping(
+      ["<Tab>"] = cmp.mapping(
         cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Insert,
           select = true,
         },
-        { "i", "c" }
-      ),
+        { "i", "c" }),
     }),
   }
 end
