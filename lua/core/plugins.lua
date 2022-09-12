@@ -217,16 +217,6 @@ packer.startup {
     -- File switcher
     use "milosavljevicoa/switcher.nvim"
 
-    -- gruvbox-material
-    use {
-      "sainnhe/gruvbox-material",
-      config = function()
-        vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
-        vim.g.gruvbox_material_disable_italic_comment = 1
-        vim.cmd([[colorscheme gruvbox-material]])
-      end
-    }
-
     -- Harpoon
     use {
       "ThePrimeagen/harpoon",
@@ -269,9 +259,10 @@ packer.startup {
 
     -- Green gruvbox
     use {
-      "sainnhe/everforest",
+      "catppuccin/nvim",
+      as = "catppuccin",
       config = function()
-        vim.g.everforest_background = 'dark'
+        require("configs.catppuccin").config()
       end
     }
 

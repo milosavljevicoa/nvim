@@ -32,7 +32,6 @@ function M.mappings(map, opts)
   map("v", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
   map("n", "<leader>rn", "<Cmd>Lspsaga rename<CR>", opts)
   map("n", "<leader>gd", "<Cmd>Lspsaga preview_definition<CR>", opts)
-  map("n", "<leader>o", "<cmd>Lspsaga LSoutlineToggle<CR>", opts)
 
   local diagnostic = require("lspsaga.diagnostic")
   map("n", "gj", diagnostic.goto_next, opts)

@@ -63,12 +63,10 @@ function M.config()
         }
       }),
       ["<C-e>"] = cmp.mapping.complete(),
-      ["<Tab>"] = cmp.mapping(
-        cmp.mapping.confirm {
+      ["<Tab>"] = cmp.mapping.confirm {
           behavior = cmp.ConfirmBehavior.Insert,
           select = true,
         },
-        { "i", "c" }),
     }),
   }
 end
