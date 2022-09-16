@@ -31,7 +31,7 @@ function M.config()
       prompt_prefix = " ",
       selection_caret = "❯ ",
       path_display = { "truncate" },
-      file_ignore_patterns = { 'build', 'tags', 'autoload', '.git', 'plugged', 'node_modules', "README" },
+      file_ignore_patterns = { 'build', 'tags', 'autoload', "\\.git", 'plugged', 'node_modules' },
       file_sorter = require("telescope.sorters").get_fzy_sorter,
       file_previewer = previewers.vim_buffer_cat.new,
       grep_previewer = previewers.vim_buffer_vimgrep.new,

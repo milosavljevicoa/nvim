@@ -6,7 +6,7 @@ function M.config()
     return
   end
 
-  nvimtree.setup { 
+  nvimtree.setup {
     auto_reload_on_write = true,
     disable_netrw = true,
     hijack_cursor = false,

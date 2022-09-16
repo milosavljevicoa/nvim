@@ -266,13 +266,21 @@ packer.startup {
       end
     }
 
+-- Packer
+  use {
+      "sindrets/diffview.nvim",
+      requires = "nvim-lua/plenary.nvim",
+    }
+
     -- Git like magit
     use {
       "TimUntersberger/neogit",
-      requires = "nvim-lua/plenary.nvim",
       config = function()
         require("configs.neogit").config()
-      end
+      end,
+      requires = {
+        "sindrets/diffview.nvim"
+      },
     }
 
     -- Morge conflicts

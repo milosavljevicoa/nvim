@@ -30,8 +30,6 @@ function M.setup()
     }
   })
 
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 end
 
 local function lsp_keymaps()
@@ -41,7 +39,7 @@ local function lsp_keymaps()
   nmap('gi', vim.lsp.buf.implementation, opts)
   nmap('GD', vim.lsp.buf.type_definition, opts)
   nmap('<space>fr', function()
-    vim.lsp.buf.formatting({ async = true })
+    vim.lsp.buf.format({ async = true })
   end, opts)
 end
 

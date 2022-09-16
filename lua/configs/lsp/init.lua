@@ -32,7 +32,8 @@ for _, server in ipairs(servers) do
 
   local present, av_overrides = pcall(require, "configs.lsp.server-settings." .. server)
   if present then
-    opts = vim.tbl_deep_extend("force", av_overrides, opts)
+    opts = vim.tbl_deep_extend("force", opts, av_overrides)
   end
+
   lspconfig[server].setup(opts)
 end
