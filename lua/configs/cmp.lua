@@ -49,10 +49,11 @@ function M.config()
       { name = "buffer", keword_lenght = 4 },
     }),
     mapping = cmp.mapping.preset.insert({
-      ['<C-g>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-m>'] = cmp.mapping.scroll_docs(4),
+      ['<C-k>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-j>'] = cmp.mapping.scroll_docs(4),
       ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
       ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+
       ["<C-Space>"] = cmp.mapping.complete(),
       ["<CR>"] = cmp.mapping.confirm { select = true },
       ['<C-s>'] = cmp.mapping.complete({
