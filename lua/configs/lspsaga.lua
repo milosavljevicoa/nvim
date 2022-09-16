@@ -28,8 +28,10 @@ function M.mappings(map, opts)
   map("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts)
   map("n", "gs", "<Cmd>Lspsaga signature_help<CR>", opts)
   map("n", "gl", "<cmd>Lspsaga show_line_diagnostics<CR>", opts)
-  map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
-  map("v", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts)
+  --[[ map("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", opts) ]]
+  map("n", "<leader>ca", function ()
+    vim.lsp.buf.code_action()
+  end, opts)
   map("n", "<leader>rn", "<Cmd>Lspsaga rename<CR>", opts)
   map("n", "<leader>gd", "<Cmd>Lspsaga preview_definition<CR>", opts)
 
