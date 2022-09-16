@@ -21,7 +21,7 @@ function M.config()
       pattern = string.gsub([[ [%'%"%)%>%]%)%}%`%,] ]], "%s+", ""),
       offset = 0,
       end_key = "b",
-      keys = "qwertyuiopzxcvbnmasdfghjkl",
+      keys = "tnshaoeudfgcrlqmwvz",
       check_comma = true,
       highlight = "Search",
       highlight_grey = "Comment",
