@@ -25,6 +25,10 @@ function M.bootstrap()
   vim.cmd [[qa]]
 end
 
+function M.error(package)
+  error(package .. " not loaded!")
+end
+
 function M.disabled_builtins()
   g.loaded_gzip = false
   g.loaded_netrwPlugin = false

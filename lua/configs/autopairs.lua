@@ -17,10 +17,10 @@ function M.config()
     enable_check_bracket_line = false,
     fast_wrap = {
       map = "<c-b>",
-      chars = { "{", "[", "(", '"', "'" },
-      pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
+      chars = { "{", "[", "(", '"', "'", "`" },
+      pattern = string.gsub([[ [%'%"%)%>%]%)%}%`%,] ]], "%s+", ""),
       offset = 0,
-      end_key = "m",
+      end_key = "b",
       keys = "qwertyuiopzxcvbnmasdfghjkl",
       check_comma = true,
       highlight = "Search",
@@ -28,9 +28,15 @@ function M.config()
     }
   }
 
-  local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+  local cmp_autopairs_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+  if not cmp_autopairs_ok then
+    error("nvim-autopairs.completion.cmp not loaded")
+    return
+  end
+
   local cmp_status_ok, cmp = pcall(require, "cmp")
   if not cmp_status_ok then
+    error("cmp not loaded")
     return
   end
   cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
