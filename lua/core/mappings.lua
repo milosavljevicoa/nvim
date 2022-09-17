@@ -16,10 +16,10 @@ vim.g.maplocalleader = " "
 map("n", "<leader>m", "m", opts)
 
 -- Helix inspired mappings
-map("n", "gl", "$", opts)
-map("n", "gs", "^", opts)
-map("n", "gh", "gg", opts)
-map("n", "ge", "G", opts)
+map({"v", "n"}, "gl", "$", opts)
+map({"v", "n"}, "gs", "^", opts)
+map({"v", "n"}, "gh", "gg", opts)
+map({"v", "n"}, "ge", "G", opts)
 map({"v", "n"}, "mm", "%", opts)
 
 -- Easier command access

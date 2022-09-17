@@ -36,9 +36,13 @@ function M.config()
     },
     integrations = {
       -- For various plugins integrations see https://github.com/catppuccin/nvim#integrations
-      leap = true,
+      gitsigns=true,
+      hop = true,
       cmp = true,
       telescope = true,
+      neogit=true,
+      nvimtree=true,
+      treesitter=true,
     },
     color_overrides = {},
     highlight_overrides = {},
