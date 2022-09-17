@@ -20,7 +20,7 @@ map("n", "gl", "$", opts)
 map("n", "gs", "^", opts)
 map("n", "gh", "gg", opts)
 map("n", "ge", "G", opts)
-map("n", "mm", "%", opts)
+map({"v", "n"}, "mm", "%", opts)
 
 -- Easier command access
 map("n", ";", ":", opts)
