@@ -12,6 +12,16 @@ map("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- For mm to work to
+map("n", "<leader>m", "m", opts)
+
+-- Helix inspired mappings
+map("n", "gl", "$", opts)
+map("n", "gs", "^", opts)
+map("n", "gh", "gg", opts)
+map("n", "ge", "G", opts)
+map("n", "mm", "%", opts)
+
 -- Easier command access
 map("n", ";", ":", opts)
 map("n", ":", ";", opts)
