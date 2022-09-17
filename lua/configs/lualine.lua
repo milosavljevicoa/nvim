@@ -9,7 +9,7 @@ function M.config()
   lualine.setup({
     options = {
       icons_enabled = true,
-      component_separators = { left = '', right = '' },
+      component_separators = { left = '', right = '' },
       section_separators = { left = '', right = '' },
       disabled_filetypes = {},
       always_divide_middle = true,
@@ -18,6 +18,28 @@ function M.config()
       lualine_a = { 'mode' },
       lualine_b = { 'branch', 'diff' },
       lualine_c = {
+        {
+          'diagnostics',
+
+          -- Table of diagnostic sources, available sources are:
+          --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
+          sources = { 'nvim_lsp' },
+
+          -- Displays diagnostics for the defined severity types
+          sections = { 'error', 'warn', 'info', 'hint' },
+
+          diagnostics_color = {
+            -- Same values as the general color option can be used here.
+            error = 'DiagnosticError', -- Changes diagnostics' error color.
+            warn  = 'DiagnosticWarn', -- Changes diagnostics' warn color.
+            info  = 'DiagnosticInfo', -- Changes diagnostics' info color.
+            hint  = 'DiagnosticHint', -- Changes diagnostics' hint color.
+          },
+          symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+          colored = true, -- Displays diagnostics status in color if set to true.
+          update_in_insert = false, -- Update diagnostics in insert mode.
+          always_visible = true, -- Show diagnostics even if there are none.
+        },
         {
           'filename',
           file_status = true,
@@ -34,28 +56,7 @@ function M.config()
           }
         }
       },
-      lualine_x = { {
-        'diagnostics',
-
-        -- Table of diagnostic sources, available sources are:
-        --   'nvim_lsp', 'nvim_diagnostic', 'nvim_workspace_diagnostic', 'coc', 'ale', 'vim_lsp'.
-        sources = { 'nvim_lsp' },
-
-        -- Displays diagnostics for the defined severity types
-        sections = { 'error', 'warn', 'info', 'hint' },
-
-        diagnostics_color = {
-          -- Same values as the general color option can be used here.
-          error = 'DiagnosticError', -- Changes diagnostics' error color.
-          warn  = 'DiagnosticWarn', -- Changes diagnostics' warn color.
-          info  = 'DiagnosticInfo', -- Changes diagnostics' info color.
-          hint  = 'DiagnosticHint', -- Changes diagnostics' hint color.
-        },
-        symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
-        colored = true, -- Displays diagnostics status in color if set to true.
-        update_in_insert = false, -- Update diagnostics in insert mode.
-        always_visible = false, -- Show diagnostics even if there are none.
-      } },
+      lualine_x = {},
       lualine_y = { 'filetype' },
       lualine_z = { 'progress' },
     },
