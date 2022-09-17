@@ -27,19 +27,6 @@ function M.config()
       highlight_grey = "Comment",
     }
   }
-
-  local cmp_autopairs_ok, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
-  if not cmp_autopairs_ok then
-    error("nvim-autopairs.completion.cmp not loaded")
-    return
-  end
-
-  local cmp_status_ok, cmp = pcall(require, "cmp")
-  if not cmp_status_ok then
-    error("cmp not loaded")
-    return
-  end
-  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
 end
 
 return M

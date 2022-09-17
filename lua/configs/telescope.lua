@@ -70,6 +70,7 @@ function M.mappings(map, opts)
   map("n", "<leader>fs", "<cmd>Telescope git_status<CR>", opts)
   map("n", "<leader>htg", "<cmd>Telescope help_tags<CR>", opts)
   map("n", "<leader>tr", "<cmd>Telescope resume<CR>", opts)
+  map("n", "<leader>te", "<cmd>Telescope diagnostics<CR>", opts)
   map("n", "<leader>tg", function ()
     require("telescope.builtin").find_files({
       prompt_title = "Find siblings and child files",

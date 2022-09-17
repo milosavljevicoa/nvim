@@ -54,8 +54,7 @@ function M.config()
       ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
       ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
 
-      ["<C-Space>"] = cmp.mapping.complete(),
-      ["<CR>"] = cmp.mapping.confirm { select = true },
+      ["<C-e>"] = cmp.mapping.complete(),
       ['<C-s>'] = cmp.mapping.complete({
         config = {
           sources = {
@@ -63,11 +62,11 @@ function M.config()
           }
         }
       }),
-      ["<C-e>"] = cmp.mapping.complete(),
+      ["<CR>"] = cmp.mapping.confirm { select = true },
       ["<Tab>"] = cmp.mapping.confirm {
-          behavior = cmp.ConfirmBehavior.Insert,
-          select = true,
-        },
+        behavior = cmp.ConfirmBehavior.Insert,
+        select = true,
+      },
     }),
   }
 end

@@ -257,7 +257,6 @@ packer.startup {
       end
     }
 
-    -- Green gruvbox
     use {
       "catppuccin/nvim",
       as = "catppuccin",
@@ -266,7 +265,6 @@ packer.startup {
       end
     }
 
--- Packer
   use {
       "sindrets/diffview.nvim",
       requires = "nvim-lua/plenary.nvim",

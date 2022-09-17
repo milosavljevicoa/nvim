@@ -118,7 +118,7 @@ function M.config()
         profile = false,
       },
     },
-  } -- END_DEFAULT_OPTS
+  }
 
 end
 
