@@ -78,6 +78,11 @@ packer.startup {
       end,
       requires = {
         {
+          -- Better comments for jsx/tsx
+          "JoosepAlviste/nvim-ts-context-commentstring",
+          after = "nvim-treesitter",
+        },
+        {
           -- Use treesitter to auto close and auto rename html tag
           "windwp/nvim-ts-autotag",
           after = "nvim-treesitter",

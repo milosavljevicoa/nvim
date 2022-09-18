@@ -63,8 +63,8 @@ function M.config()
       args = {},
     },
     diagnostics = {
-      enable = false,
-      show_on_dirs = false,
+      enable = true,
+      show_on_dirs = true,
       icons = {
         hint = "",
         info = "",
