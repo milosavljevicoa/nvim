@@ -24,8 +24,8 @@ end
 
 for _, server in ipairs(servers) do
   local opts = {
-    on_attach = function(client)
-      handlers.on_attach(client)
+    on_attach = function()
+      handlers.on_attach()
     end,
     capabilities = handlers.capabilities,
   }

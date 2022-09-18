@@ -293,11 +293,16 @@ packer.startup {
       end
     }
 
+    -- Jump around
     use {
       'phaazon/hop.nvim',
       config = function()
         require("configs.hop").config()
       end
+    }
+
+    use {
+      'ThePrimeagen/vim-be-good'
     }
   end,
 }

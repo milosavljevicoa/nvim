@@ -43,11 +43,7 @@ local function lsp_keymaps()
   end, opts)
 end
 
-M.on_attach = function(client)
-  if client.name == "tsserver" or client.name == "jsonls" or client.name == "html" or client.name == "sumneko_lua" then
-    client.server_capabilities.document_formatting = false
-  end
-
+M.on_attach = function()
   lsp_keymaps()
 end
 

@@ -3,10 +3,6 @@ local M = {}
 local opts = { noremap = true, silent = true }
 local map = vim.keymap.set
 
---[[
-*       search for word under cursor
-]]
-
 -- Remap space as leader key
 map("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
@@ -16,14 +12,14 @@ vim.g.maplocalleader = " "
 map("n", "<leader>m", "m", opts)
 
 -- Helix inspired mappings
-map({"v", "n"}, "gl", "$", opts)
-map({"v", "n"}, "gs", "^", opts)
-map({"v", "n"}, "gh", "gg", opts)
-map({"v", "n"}, "ge", "G", opts)
-map({"v", "n"}, "mm", "%", opts)
+map({ "v", "n" }, "gl", "$", opts)
+map({ "v", "n" }, "gs", "^", opts)
+map({ "v", "n" }, "gh", "gg", opts)
+map({ "v", "n" }, "ge", "G", opts)
+map({ "v", "n" }, "mm", "%", opts)
 
-
-map({"v", "n"}, "gp", "<C-^>", opts)
+-- Helix inspired mapping
+map({ "v", "n" }, "gp", "<C-^>", opts)
 
 -- Easier command access
 map("n", ";", ":", opts)
@@ -68,7 +64,7 @@ local executeMappingns = function()
   local scan = require 'plenary.scandir'
   local utils = require 'core.utils'
 
-  local suffix = utils.makePath({'lua', 'configs'})
+  local suffix = utils.makePath({ 'lua', 'configs' })
   local configs = vim.fn.stdpath 'config' .. suffix
   local files = scan.scan_dir(configs, { hidden = false, depth = 2 })
 
