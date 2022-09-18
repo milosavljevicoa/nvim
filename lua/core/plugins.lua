@@ -83,11 +83,6 @@ packer.startup {
           after = "nvim-treesitter",
         },
         {
-          -- Context based commenting
-          "JoosepAlviste/nvim-ts-context-commentstring",
-          after = "nvim-treesitter",
-        },
-        {
           -- Treesitter Playground
           "nvim-treesitter/playground",
           after = "nvim-treesitter",
@@ -97,10 +92,14 @@ packer.startup {
           "nvim-treesitter/nvim-treesitter-context",
           after = "nvim-treesitter",
           config = function()
-            require("configs.treesitter-context").config()
+            require("configs.treesitter.context").config()
           end
+        },
+        {
+          -- Text objects
+          "nvim-treesitter/nvim-treesitter-textobjects",
+          after = "nvim-treesitter",
         }
-
       },
     }
 

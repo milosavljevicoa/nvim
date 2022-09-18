@@ -22,6 +22,9 @@ map({"v", "n"}, "gh", "gg", opts)
 map({"v", "n"}, "ge", "G", opts)
 map({"v", "n"}, "mm", "%", opts)
 
+
+map({"v", "n"}, "gp", "<C-^>", opts)
+
 -- Easier command access
 map("n", ";", ":", opts)
 map("n", ":", ";", opts)
