@@ -21,12 +21,6 @@ map({ "v", "n" }, "mm", "%", opts)
 -- Helix inspired mapping
 map({ "v", "n" }, "gp", "<C-^>", opts)
 
--- Easier command access
-map("n", ";", ":", opts)
-map("n", ":", ";", opts)
-map("v", ";", ":", opts)
-map("v", ":", ";", opts)
-
 --Escape
 map("i", "jk", "<Esc>", opts)
 

@@ -43,17 +43,17 @@ function M.config()
       ghost_text = true,
       native_menu = false,
     },
-    sources = cmp.config.sources({
-      { name = "nvim_lsp" },
-      { name = "path" },
-      { name = "buffer", keword_lenght = 4 },
+    sources = cmp.config.sources({ -- Order matters on what completions you will see first
+      { name = 'nvim_lsp' },
+      { name = 'path' },
+    }, {
+      { name = 'buffer', keyword_length = 4 }, -- Dont do completion until you've entered at least 4 chars
     }),
     mapping = cmp.mapping.preset.insert({
       ['<C-k>'] = cmp.mapping.scroll_docs(-4),
       ['<C-j>'] = cmp.mapping.scroll_docs(4),
       ["<C-n>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
       ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
-
       ["<C-e>"] = cmp.mapping.complete(),
       ['<C-s>'] = cmp.mapping.complete({
         config = {

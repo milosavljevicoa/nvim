@@ -66,18 +66,20 @@ function M.mappings(map, opts)
   map("n", "<leader>tt", "<cmd>Telescope grep_string<CR>", opts)
   map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
   map("n", "<leader>bl", "<cmd>Telescope buffers<CR>", opts)
-  map("n", "<leader>ts", "<cmd>Telescope current_buffer_fuzzy_find<CR>", opts)
-  map("n", "<leader>fs", "<cmd>Telescope git_status<CR>", opts)
-  map("n", "<leader>htg", "<cmd>Telescope help_tags<CR>", opts)
   map("n", "<leader>tr", "<cmd>Telescope resume<CR>", opts)
   map("n", "<leader>te", "<cmd>Telescope diagnostics<CR>", opts)
-  map("n", "<leader>tg", function ()
+
+  map("n", "<leader>htg", "<cmd>Telescope help_tags<CR>", opts)
+
+  map("n", "<leader>ts", function ()
     require("telescope.builtin").find_files({
       prompt_title = "Find siblings and child files",
       cwd = vim.fn.expand('%:p:h'),
     })
   end, opts)
 
+  map("n", "<leader>gr", "<cmd>Telescope lsp_references<CR>", opts)
+  map("n", "<leader>o", "<cmd>Telescope lsp_document_symbols<CR>", opts)
   -- nmap("<leader>fc", M.find_siblings_child_files, opts)
   -- nmap("<leader>vrc", M.search_nvim(), opts)
 end
