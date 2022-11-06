@@ -161,9 +161,7 @@ packer.startup {
       -- "williamboman/nvim-lsp-installer",
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
-      'simrat39/rust-tools.nvim',
-      'glepnir/lspsaga.nvim',
-      {
+      'simrat39/rust-tools.nvim', {
         "neovim/nvim-lspconfig",
         config = function()
           require("configs.lsp")
@@ -248,7 +246,6 @@ packer.startup {
         }
       end
     }
-
 
     use {
       "catppuccin/nvim",

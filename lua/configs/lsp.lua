@@ -27,6 +27,8 @@ local signs = {
 }
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  width = 100,
+  height = 100,
   border = "rounded",
 })
 
@@ -57,14 +59,14 @@ vim.diagnostic.config({
 local map = vim.keymap.set
 
 local on_attach = function(client, bufnr)
-  local opts = { noremap = true, silent = true, buffer = bufnr }
+  local opts = { noremap = true, silent = true }
   map('n', 'gd', function() vim.lsp.buf.definition() end, opts)
   map('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
   map('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
   map('n', 'GD', function() vim.lsp.buf.type_definition() end, opts)
   map('n', '<space>fr', function() vim.lsp.buf.format({ async = true }) end, opts)
   map("n", "K", function() vim.lsp.buf.hover() end, opts)
-  map("i", "<C-m>", function() vim.lsp.buf.signature_help() end, opts)
+  map("n", "<leader>gs", function() vim.lsp.buf.signature_help() end, opts)
   map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
   map("n", "<leader>gl", function() vim.diagnostic.open_float() end, opts)
   map("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
