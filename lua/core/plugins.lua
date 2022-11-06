@@ -156,9 +156,13 @@ packer.startup {
     -- LSP completion source
     use "hrsh7th/cmp-nvim-lsp"
 
-    -- LSP manager
+    -- LSP
     use {
-      "williamboman/nvim-lsp-installer",
+      -- "williamboman/nvim-lsp-installer",
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+      'simrat39/rust-tools.nvim',
+      'glepnir/lspsaga.nvim',
       {
         "neovim/nvim-lspconfig",
         config = function()
@@ -245,21 +249,6 @@ packer.startup {
       end
     }
 
-    -- Prettier LSP
-    use {
-      "glepnir/lspsaga.nvim",
-      branch = "main",
-      config = function()
-        require("configs.lspsaga").config()
-      end
-    }
-
-    use {
-      "simrat39/rust-tools.nvim",
-      config = function()
-        require("configs.rust-tools").config()
-      end
-    }
 
     use {
       "catppuccin/nvim",
@@ -285,7 +274,7 @@ packer.startup {
       },
     }
 
-    -- Morge conflicts
+    -- Merge conflicts
     use {
       "akinsho/git-conflict.nvim",
       config = function()
@@ -304,6 +293,7 @@ packer.startup {
     use {
       'ThePrimeagen/vim-be-good'
     }
+
   end,
 }
 

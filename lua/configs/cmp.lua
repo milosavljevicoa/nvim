@@ -45,9 +45,11 @@ function M.config()
     },
     sources = cmp.config.sources({ -- Order matters on what completions you will see first
       { name = 'nvim_lsp' },
+      -- { name = 'nvim_lsp_signature_help' },
+      { name = 'nvim_lua' },
       { name = 'path' },
     }, {
-      { name = 'buffer', keyword_length = 4 }, -- Dont do completion until you've entered at least 4 chars
+      { name = 'buffer', keyword_length = 4 },
     }),
     mapping = cmp.mapping.preset.insert({
       ['<C-k>'] = cmp.mapping.scroll_docs(-4),
@@ -62,7 +64,6 @@ function M.config()
           }
         }
       }),
-      ["<CR>"] = cmp.mapping.confirm { select = true },
       ["<Tab>"] = cmp.mapping.confirm {
         behavior = cmp.ConfirmBehavior.Insert,
         select = true,
