@@ -49,10 +49,10 @@ function M.config()
           -- Shortens path to leave 40 spaces in the window
           --[[ shorting_target = 40, ]]
           symbols = {
-            modified = ' ', -- Text to show when the file is modified.
-            readonly = ' ', -- Text to show when the file is non-modifiable or readonly.
+            modified = ' [m]', -- Text to show when the file is modified.
+            readonly = ' [r]', -- Text to show when the file is non-modifiable or readonly.
             unnamed = '[No Name]', -- Text to show for unnamed buffers.
-            newfile = ' ', -- Text to show for new created file before first writting
+            newfile = ' [n]', -- Text to show for new created file before first writting
           }
         }
       },
