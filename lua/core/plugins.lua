@@ -51,20 +51,14 @@ packer.startup {
       end,
     }
 
-    -- use {
-    --   "mfussenegger/nvim-dap",
-    --   config = function()
-    --     require("configs.nvim-dap").config()
-    --   end,
-    -- }
-
-    -- Debugger
-    -- [TODO]: Test out how does this work
     use {
       "rcarriga/nvim-dap-ui",
-      -- "nvim-dap-python",
-      requires = {
-        "mfussenegger/nvim-dap"
+      "theHamsta/nvim-dap-virtual-text",
+      {
+        "mfussenegger/nvim-dap",
+        config = function()
+          require("configs.nvim-dap").config()
+        end,
       }
     }
 
@@ -255,7 +249,7 @@ packer.startup {
       end
     }
 
-  use {
+    use {
       "sindrets/diffview.nvim",
       requires = "nvim-lua/plenary.nvim",
     }

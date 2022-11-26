@@ -1,19 +1,25 @@
 local M = {}
 
 function M.config()
-  local status_ok, dap = pcall(require, "dap")
-  local utils = require 'core.utils'
-  if not status_ok then
-    print "Dap not found..."
+  local status_dap_ok, dap = pcall(require, "dap")
+  local status_dap_ui_ok, dap_ui = pcall(require, "dap-ui")
+  local status_dap_virtual_text_ok, dap_virtual_text = pcall(require, "nvim-dap-virtual-text")
+
+  if not status_dap_ok then
+    error "dap not found..."
+    return
+  end
+  if not status_dap_ui_ok then
+    -- error "dap-ui not found..."
+    return
+  end
+  if not status_dap_virtual_text_ok then
+    error "nvim-dap-virtual-text not found..."
     return
   end
 
-  local pythonPath = utils.makePath({'.virtualenvs', 'tools', 'bin', 'python'})
-  dap.adapters.python = {
-    type = 'executable';
-    command = os.getenv('HOME') .. pythonPath;
-    args = { '-m', 'debugpy.adapter' };
-  }
+  dap_virtual_text.setup {}
+
 
 end
 

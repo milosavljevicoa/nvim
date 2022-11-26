@@ -32,14 +32,14 @@ set.number = true -- Show numberline
 set.relativenumber = true -- Show relative numberline
 set.wrap = false -- Disable wrapping of lines longer than the width of window
 set.conceallevel = 0 -- Show text normally
-set.cmdheight = 2 -- Number of screen lines to use for the command line
+set.cmdheight = 1 -- Number of screen lines to use for the command line
 set.shiftwidth = numberOfLines -- Number of space inserted for indentation
 set.tabstop = numberOfLines -- Number of space in a tab
 set.scrolloff = numberOfLines -- Number of lines to keep above and below the cursor
 set.sidescrolloff = numberOfLines -- Number of columns to keep at the sides of the cursor
 set.pumheight = 10 -- Height of the pop up menu
 set.history = 100 -- Number of commands to remember in a history table
-set.timeoutlen = 500 -- Length of time to wait for a mapped sequence
+set.timeoutlen = 700 -- Length of time to wait for a mapped sequence
 set.updatetime = 300 -- Length of time to wait before triggering the plugin
 
 

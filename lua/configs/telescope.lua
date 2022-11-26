@@ -62,8 +62,8 @@ end
 
 
 function M.mappings(map, opts)
-  map("n", "<leader>tf", "<cmd>Telescope live_grep<CR>", opts)
-  map("n", "<leader>tt", "<cmd>Telescope grep_string<CR>", opts)
+  map("n", "<leader>tg", "<cmd>Telescope live_grep<CR>", opts)
+  map("n", "<leader>tc", "<cmd>Telescope grep_string<CR>", opts)
   map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
   map("n", "<leader>bl", "<cmd>Telescope buffers<CR>", opts)
   map("n", "<leader>tr", "<cmd>Telescope resume<CR>", opts)
@@ -71,9 +71,15 @@ function M.mappings(map, opts)
 
   map("n", "<leader>htg", "<cmd>Telescope help_tags<CR>", opts)
 
-  map("n", "<leader>ts", function ()
+  map("n", "<leader>ttg", function ()
+    require("telescope.builtin").live_grep({
+      prompt_title = "Live grep from pwd:",
+      cwd = vim.fn.expand('%:p:h'),
+    })
+  end, opts)
+  map("n", "<leader>tff", function ()
     require("telescope.builtin").find_files({
-      prompt_title = "Find siblings and child files",
+      prompt_title = "Find siblings and child files:",
       cwd = vim.fn.expand('%:p:h'),
     })
   end, opts)

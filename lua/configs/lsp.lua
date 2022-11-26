@@ -77,6 +77,10 @@ lspconfig['sumneko_lua'].setup {
   on_attach = on_attach,
 }
 
+lspconfig['tsserver'].setup {
+  on_attach = on_attach,
+}
+
 local status_ok, rust_tools = pcall(require, "rust-tools")
 if not status_ok then
   error("rust-tools not loaded")
