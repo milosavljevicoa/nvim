@@ -158,5 +158,3 @@ S       will prompt the user to enter a path and then expands the tree to match 
 C-k       will toggle a popup with file infos about the file under the cursor
 
 --]]
-
-return M

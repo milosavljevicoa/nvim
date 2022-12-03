@@ -3,6 +3,7 @@ local map = vim.keymap.set
 
 local ls_status_ok, ls = pcall(require, "luasnip")
 if not ls_status_ok then
+  print("luasnip not loaded")
   return
 end
 
@@ -20,11 +21,15 @@ ls.config.set_config {
   -- Autosnippets:
   enable_autosnippets = true
 }
+--
+-- ls.snippets = {
+-- }
 
-ls.snippets = {
-  -- go = require "configs.luasnip.go"
-}
 
+
+require("configs.luasnip.rust")
+
+print("hello v1")
 -- next jump in snippet
 map({ "i", "s" }, "<c-j>", function()
   if ls.expand_or_jumpable() then
