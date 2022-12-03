@@ -6,6 +6,7 @@ function M.config()
     return
   end
 
+
   vim.g.catppuccin_flavour = "mocha" -- latte, frappe, macchiato, mocha
 
   catppuccin.setup({

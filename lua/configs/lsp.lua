@@ -1,18 +1,18 @@
 local lsp_config_ok, lspconfig = pcall(require, "lspconfig")
 if not lsp_config_ok then
-  error("lspconfig failed to load")
+  print("lspconfig failed to load")
   return
 end
 
 local mason_ok, mason = pcall(require, "mason")
 if not mason_ok then
-  error("mason failed to load")
+  print("mason failed to load")
   return
 end
 
 local mason_lspconfig_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
 if not mason_lspconfig_ok then
-  error("mason_lspconfig failed to load")
+  print("mason_lspconfig failed to load")
   return
 end
 
@@ -64,6 +64,7 @@ local on_attach = function(client, bufnr)
   map('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
   map('n', 'GD', function() vim.lsp.buf.type_definition() end, opts)
   map('n', '<space>fr', function() vim.lsp.buf.format({ async = true }) end, opts)
+  map('v', '<space>fr', function() vim.lsp.buf.format({ async = true }) end, opts)
   map("n", "K", function() vim.lsp.buf.hover() end, opts)
   map("n", "<leader>gs", function() vim.lsp.buf.signature_help() end, opts)
   map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)

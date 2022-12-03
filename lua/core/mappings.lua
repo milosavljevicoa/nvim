@@ -1,12 +1,16 @@
-local M = {}
-
 local opts = { noremap = true, silent = true }
 local map = vim.keymap.set
+
+local config_path = "~/.config/nvim/lua/core/mappings";
 
 -- Remap space as leader key
 map("", "<Space>", "<Nop>", opts)
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+
+-- Reload config with mappings
+map("n", "<leader>vrc", "", opts)
 
 -- For mm to work to
 map("n", "<leader>m", "m", opts)
@@ -49,10 +53,10 @@ map("v", ">", ">gv", opts)
 
 -- File switcher
 -- Angular
-map("n", "<A-h>", "<cmd>lua require('switcher').switch_to('html', 'spec')<CR>", opts)
-map("n", "<A-t>", "<cmd>lua require('switcher').switch_to('ts', 'spec')<CR>", opts)
-map("n", "<A-n>", "<cmd>lua require('switcher').switch_to('spec.ts', 'spec')<CR>", opts)
-map("n", "<A-s>", "<cmd>lua require('switcher').switch_to('scss', 'spec')<CR>", opts)
+-- map("n", "<A-h>", "<cmd>lua require('switcher').switch_to('html', 'spec')<CR>", opts)
+-- map("n", "<A-t>", "<cmd>lua require('switcher').switch_to('ts', 'spec')<CR>", opts)
+-- map("n", "<A-n>", "<cmd>lua require('switcher').switch_to('spec.ts', 'spec')<CR>", opts)
+-- map("n", "<A-s>", "<cmd>lua require('switcher').switch_to('scss', 'spec')<CR>", opts)
 
 local executeMappingns = function()
   local scan = require 'plenary.scandir'
@@ -60,18 +64,16 @@ local executeMappingns = function()
 
   local suffix = utils.makePath({ 'lua', 'configs' })
   local configs = vim.fn.stdpath 'config' .. suffix
-  local files = scan.scan_dir(configs, { hidden = false, depth = 2 })
+  local files = scan.scan_dir(configs, { hidden = false, depth = 1 })
 
   for _, file in ipairs(files) do
     file = string.sub(file, string.find(configs, suffix) + 5, string.len(file) - 4)
 
-    local ok, customConfig = pcall(require, file)
-    if ok and type(customConfig) == "table" and type(customConfig.mappings) == "function" then
-      customConfig.mappings(map, opts)
+    if not pcall(require, file) then
+      print("---Failed to load " .. file .. "---")
     end
+
   end
 end
 
 executeMappingns()
-
-return M

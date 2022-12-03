@@ -25,10 +25,6 @@ function M.bootstrap()
   vim.cmd [[qa]]
 end
 
-function M.error(package)
-  error(package .. " not loaded!")
-end
-
 function M.disabled_builtins()
   g.loaded_gzip = false
   g.loaded_netrwPlugin = false
@@ -61,7 +57,7 @@ function M.makePath(paths)
 end
 
 
-M.imap = function(keymap, handler, opts)
+--[[M.imap = function(keymap, handler, opts)
   if not opts then
     opts = {}
   end
@@ -73,6 +69,6 @@ M.nmap = function(keymap, handler, opts)
     opts = {}
   end
   vim.keymap.set('n', keymap, handler, opts)
-end
+end--]]
 
 return M

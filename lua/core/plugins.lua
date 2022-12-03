@@ -1,5 +1,3 @@
-local M = {}
-
 local packer_status_ok, packer = pcall(require, "packer")
 if not packer_status_ok then
   print "Packer not installed"
@@ -30,119 +28,55 @@ packer.startup {
     -- Icons
     use {
       "kyazdani42/nvim-web-devicons",
-      config = function()
-        require("configs.icons").config()
-      end,
+      -- config = function()
+      --   require("configs.icons").config()
+      -- end,plu
     }
 
     -- File explorer
     use {
       "kyazdani42/nvim-tree.lua",
-      config = function()
-        require("configs.nvim-tree").config()
-      end,
+      -- config = function()
+      --   require("configs.nvim-tree").config()
+      -- end,
     }
 
     -- Statusline
     use {
       "nvim-lualine/lualine.nvim",
-      config = function()
-        require("configs.lualine").config()
-      end,
+      -- config = function()
+      --   require("configs.lualine").config()
+      -- end,
     }
 
-    use {
-      "rcarriga/nvim-dap-ui",
-      "theHamsta/nvim-dap-virtual-text",
-      {
-        "mfussenegger/nvim-dap",
-        config = function()
-          require("configs.nvim-dap").config()
-        end,
-      }
-    }
+    use "rcarriga/nvim-dap-ui"
+    use "theHamsta/nvim-dap-virtual-text"
+    use "mfussenegger/nvim-dap"
 
     -- Tree sitter
-    use {
-      "nvim-treesitter/nvim-treesitter",
-      run = ":TSUpdate",
-      event = "BufRead",
-      config = function()
-        require("configs.treesitter").config()
-      end,
-      requires = {
-        {
-          -- Better comments for jsx/tsx
-          "JoosepAlviste/nvim-ts-context-commentstring",
-          after = "nvim-treesitter",
-        },
-        {
-          -- Use treesitter to auto close and auto rename html tag
-          "windwp/nvim-ts-autotag",
-          after = "nvim-treesitter",
-        },
-        {
-          -- Treesitter Playground
-          "nvim-treesitter/playground",
-          after = "nvim-treesitter",
-        },
-        {
-          -- Code context
-          "nvim-treesitter/nvim-treesitter-context",
-          after = "nvim-treesitter",
-          config = function()
-            require("configs.treesitter.context").config()
-          end
-        },
-        {
-          -- Text objects
-          "nvim-treesitter/nvim-treesitter-textobjects",
-          after = "nvim-treesitter",
-        }
-      },
-    }
+    use "nvim-treesitter/nvim-treesitter"
+    use "JoosepAlviste/nvim-ts-context-commentstring"
+    use "windwp/nvim-ts-autotag"
+    use "nvim-treesitter/playground"
+    use "nvim-treesitter/nvim-treesitter-context"
+    use "nvim-treesitter/nvim-treesitter-textobjects"
 
     -- Snippet engine
-    use {
-      "L3MON4D3/LuaSnip",
-      config = function()
-        require("configs.luasnip").config()
-      end,
-      requires = {
-        -- Snippet collections
-        "rafamadriz/friendly-snippets",
-      },
-    }
+    use "L3MON4D3/LuaSnip"
+    use "rafamadriz/friendly-snippets"
 
-    -- TabNine
-    -- https://github.com/tzachar/cmp-tabnine
 
     -- Completion engine
-    use {
-      "hrsh7th/nvim-cmp",
-      event = "BufRead",
-      config = function()
-        require("configs.cmp").config()
-      end,
-    }
+    use "hrsh7th/nvim-cmp"
 
     -- Snippet completion source
-    use {
-      "saadparwaiz1/cmp_luasnip",
-      after = "nvim-cmp",
-    }
+    use "saadparwaiz1/cmp_luasnip"
 
     -- Buffer completion source
-    use {
-      "hrsh7th/cmp-buffer",
-      after = "nvim-cmp",
-    }
+    use "hrsh7th/cmp-buffer"
 
     -- Path completion source
-    use {
-      "hrsh7th/cmp-path",
-      after = "nvim-cmp",
-    }
+    use "hrsh7th/cmp-path"
 
     -- Pictorgrams for lsp
     use "onsails/lspkind-nvim"
@@ -151,79 +85,31 @@ packer.startup {
     use "hrsh7th/cmp-nvim-lsp"
 
     -- LSP
-    use {
-      -- "williamboman/nvim-lsp-installer",
-      'williamboman/mason.nvim',
-      'williamboman/mason-lspconfig.nvim',
-      'simrat39/rust-tools.nvim', {
-        "neovim/nvim-lspconfig",
-        config = function()
-          require("configs.lsp")
-        end,
-      }
-    }
-
-    -- Formatting and linting
-    -- use {
-    --   "jose-elias-alvarez/null-ls.nvim",
-    --   event = "BufRead",
-    --   config = function()
-    --     require("configs.null-ls").config()
-    --   end,
-    -- }
+    use 'williamboman/mason.nvim'
+    use 'williamboman/mason-lspconfig.nvim'
+    use 'simrat39/rust-tools.nvim'
+    use "neovim/nvim-lspconfig"
 
     -- Fuzzy finder
-    use {
-      "nvim-telescope/telescope.nvim",
-      cmd = "Telescope",
-      config = function()
-        require("configs.telescope").config()
-      end,
-    }
+    use "nvim-telescope/telescope.nvim"
 
     -- Fuzzy finder syntax support
-    use {
-      "nvim-telescope/telescope-fzy-native.nvim",
-      run = "make",
-    }
+    use { "nvim-telescope/telescope-fzy-native.nvim", run = "make", }
 
     -- Git integration
-    use {
-      "lewis6991/gitsigns.nvim",
-      event = "BufRead",
-      config = function()
-        require("configs.gitsigns").config()
-      end,
-    }
+    use "lewis6991/gitsigns.nvim"
 
     -- Autopairs
-    use {
-      "windwp/nvim-autopairs",
-      event = "InsertEnter",
-      config = function()
-        require("configs.autopairs").config()
-      end,
-    }
+    use "windwp/nvim-autopairs"
 
     -- Commenting
-    use {
-      "numToStr/Comment.nvim",
-      event = "BufRead",
-      config = function()
-        require("configs.comment").config()
-      end,
-    }
+    use "numToStr/Comment.nvim"
 
     -- File switcher
     use "milosavljevicoa/switcher.nvim"
 
     -- Harpoon
-    use {
-      "ThePrimeagen/harpoon",
-      config = function()
-        require("configs.harpoon").config()
-      end,
-    }
+    use "ThePrimeagen/harpoon"
 
     use {
       "folke/zen-mode.nvim",
@@ -241,51 +127,20 @@ packer.startup {
       end
     }
 
-    use {
-      "catppuccin/nvim",
-      as = "catppuccin",
-      config = function()
-        require("configs.catppuccin").config()
-      end
-    }
+    use "folke/tokyonight.nvim"
 
-    use {
-      "sindrets/diffview.nvim",
-      requires = "nvim-lua/plenary.nvim",
-    }
+    use "sindrets/diffview.nvim"
 
     -- Git like magit
-    use {
-      "TimUntersberger/neogit",
-      config = function()
-        require("configs.neogit").config()
-      end,
-      requires = {
-        "sindrets/diffview.nvim"
-      },
-    }
+    use "TimUntersberger/neogit"
 
     -- Merge conflicts
-    use {
-      "akinsho/git-conflict.nvim",
-      config = function()
-        require("git-conflict").setup()
-      end
-    }
+    use "akinsho/git-conflict.nvim"
 
     -- Jump around
-    use {
-      'phaazon/hop.nvim',
-      config = function()
-        require("configs.hop").config()
-      end
-    }
+    use 'phaazon/hop.nvim'
 
-    use {
-      'ThePrimeagen/vim-be-good'
-    }
+    use 'ThePrimeagen/vim-be-good'
 
   end,
 }
-
-return M

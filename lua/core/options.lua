@@ -1,5 +1,3 @@
-local M = {}
-
 local set = vim.opt
 
 local numberOfLines = 4
@@ -41,8 +39,3 @@ set.pumheight = 10 -- Height of the pop up menu
 set.history = 100 -- Number of commands to remember in a history table
 set.timeoutlen = 700 -- Length of time to wait for a mapped sequence
 set.updatetime = 300 -- Length of time to wait before triggering the plugin
-
-
-
-
-return M
