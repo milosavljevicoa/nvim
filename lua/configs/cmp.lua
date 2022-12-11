@@ -16,15 +16,76 @@ if not lspkind_status_ok then
   return
 end
 
+local ELLIPSIS_CHAR = '…'
+local MAX_LABEL_WIDTH = 20
+-- limit lenght of a completion item
+local format = function(entry, vim_item)
+  local label = vim_item.abbr
+  local truncated_label = vim.fn.strcharpart(label, 0, MAX_LABEL_WIDTH)
+  if truncated_label ~= label then
+    vim_item.abbr = truncated_label .. ELLIPSIS_CHAR
+  end
+  return vim_item
+end
+
+-- local kind_icons = {
+--   Text = "",
+--   Method = "",
+--   Function = "",
+--   Constructor = "",
+--   Field = "",
+--   Variable = "",
+--   Class = "ﴯ",
+--   Interface = "",
+--   Module = "",
+--   Property = "ﰠ",
+--   Unit = "",
+--   Value = "",
+--   Enum = "",
+--   Keyword = "",
+--   Snippet = "",
+--   Color = "",
+--   File = "",
+--   Reference = "",
+--   Folder = "",
+--   EnumMember = "",
+--   Constant = "",
+--   Struct = "",
+--   Event = "",
+--   Operator = "",
+--   TypeParameter = ""
+-- }
+
+  -- formatting = {
+  --   format = function(entry, vim_item)
+  --     -- Kind icons
+  --     vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
+  --     -- Source
+  --     vim_item.menu = ({
+  --       buffer = "[Buffer]",
+  --       nvim_lsp = "[LSP]",
+  --       luasnip = "[LuaSnip]",
+  --       nvim_lua = "[Lua]",
+  --       latex_symbols = "[LaTeX]",
+  --     })[entry.source.name]
+  --     return vim_item
+  --   end
+  -- },
+
 cmp.setup {
   performance = {
     debounce = 150,
   },
   formatting = {
     format = lspkind.cmp_format {
-      mode = 'symbol_text',
-      maxwidth = 80, -- prevent the popup from showing more than provided characters
       with_text = true,
+      menu = {
+        buffer = "[buf]",
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[api]",
+        path = "[path]",
+        luasnip = "[snip]",
+      },
     },
   },
   snippet = {

@@ -58,19 +58,23 @@ packer.startup {
 
     -- Completion engine
     use "hrsh7th/nvim-cmp"
-    use 'hrsh7th/cmp-cmdline'
-    -- Snippet completion source
-    use "saadparwaiz1/cmp_luasnip"
-    -- Buffer completion source
-    use "hrsh7th/cmp-buffer"
-    -- Path completion source
-    use "hrsh7th/cmp-path"
-    -- Pictorgrams for lsp
-    use "onsails/lspkind-nvim"
-    -- LSP completion source
-    use "hrsh7th/cmp-nvim-lsp"
-    use "hrsh7th/cmp-nvim-lsp-document-symbol"
-    use "hrsh7th/cmp-nvim-lsp-signature-help"
+    use({
+      'hrsh7th/cmp-cmdline',
+      -- Snippet completion source
+      "saadparwaiz1/cmp_luasnip",
+      -- Buffer completion source
+      "hrsh7th/cmp-buffer",
+      -- Path completion source
+      "hrsh7th/cmp-path",
+      -- Pictorgrams for lsp
+      "onsails/lspkind-nvim",
+      -- LSP completion source
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp-document-symbol",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      after = { "hrsh7th/nvim-cmp" },
+      requires = { "hrsh7th/nvim-cmp" },
+    })
 
 
     -- LSP
