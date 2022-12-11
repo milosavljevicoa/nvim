@@ -29,7 +29,6 @@ ls.config.set_config {
 
 require("configs.luasnip.rust")
 
-print("hello v1")
 -- next jump in snippet
 map({ "i", "s" }, "<c-j>", function()
   if ls.expand_or_jumpable() then

@@ -63,6 +63,7 @@ local on_attach = function(client, bufnr)
   map('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
   map('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
   map('n', 'GD', function() vim.lsp.buf.type_definition() end, opts)
+  map('i', '<c-o>', function() vim.lsp.buf.signature_help() end, opts)
   map('n', '<space>fr', function() vim.lsp.buf.format({ async = true }) end, opts)
   map('v', '<space>fr', function() vim.lsp.buf.format({ async = true }) end, opts)
   map("n", "K", function() vim.lsp.buf.hover() end, opts)
@@ -74,11 +75,15 @@ local on_attach = function(client, bufnr)
   map("n", "gk", function() vim.diagnostic.goto_prev() end, opts)
 end
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
 lspconfig['sumneko_lua'].setup {
+  capabilities = capabilities,
   on_attach = on_attach,
 }
 
 lspconfig['tsserver'].setup {
+  capabilities = capabilities,
   on_attach = on_attach,
 }
 
@@ -91,6 +96,7 @@ end
 rust_tools.setup {
   server = {
     on_attach = on_attach,
+    capabilities = capabilities,
   },
   inlay_hints = {
     auto = true,

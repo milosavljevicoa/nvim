@@ -28,25 +28,16 @@ packer.startup {
     -- Icons
     use {
       "kyazdani42/nvim-web-devicons",
-      -- config = function()
-      --   require("configs.icons").config()
-      -- end,plu
     }
 
     -- File explorer
     use {
       "kyazdani42/nvim-tree.lua",
-      -- config = function()
-      --   require("configs.nvim-tree").config()
-      -- end,
     }
 
     -- Statusline
     use {
       "nvim-lualine/lualine.nvim",
-      -- config = function()
-      --   require("configs.lualine").config()
-      -- end,
     }
 
     use "rcarriga/nvim-dap-ui"
@@ -65,24 +56,22 @@ packer.startup {
     use "L3MON4D3/LuaSnip"
     use "rafamadriz/friendly-snippets"
 
-
     -- Completion engine
     use "hrsh7th/nvim-cmp"
-
+    use 'hrsh7th/cmp-cmdline'
     -- Snippet completion source
     use "saadparwaiz1/cmp_luasnip"
-
     -- Buffer completion source
     use "hrsh7th/cmp-buffer"
-
     -- Path completion source
     use "hrsh7th/cmp-path"
-
     -- Pictorgrams for lsp
     use "onsails/lspkind-nvim"
-
     -- LSP completion source
     use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-nvim-lsp-document-symbol"
+    use "hrsh7th/cmp-nvim-lsp-signature-help"
+
 
     -- LSP
     use 'williamboman/mason.nvim'

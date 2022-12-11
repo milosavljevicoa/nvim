@@ -18,6 +18,7 @@ telescope.setup {
       show_line = true, -- false if not to show line reference
       trix_text = true,
     },
+
     buffers = {
       show_all_buffers = true,
       sort_lastused = true,
@@ -41,7 +42,8 @@ telescope.setup {
     file_previewer = previewers.vim_buffer_cat.new,
     grep_previewer = previewers.vim_buffer_vimgrep.new,
     qflist_previewer = previewers.vim_buffer_qflist.new,
-    layout_config = { height = 0.9, width = 0.9 },
+    layout_strategy = 'vertical',
+    layout_config = { height = 0.95, width = 0.9 },
     mappings = {
       i = {
         ["<C-c>"] = actions.close,
