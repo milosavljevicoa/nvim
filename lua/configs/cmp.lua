@@ -72,6 +72,7 @@ end
   --   end
   -- },
 
+
 cmp.setup {
   performance = {
     debounce = 150,
@@ -98,7 +99,7 @@ cmp.setup {
     documentation = cmp.config.window.bordered(),
   },
   experimental = {
-    ghost_text = true,
+    ghost_text = false,
     native_menu = false,
   },
   sources = cmp.config.sources({ -- Order matters on what completions you will see first

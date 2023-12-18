@@ -71,4 +71,4 @@ neogit.setup {
   }
 }
 
-map('n', '<leader>n', '<Cmd>Neogit<CR>', opts)
+-- map('n', '<leader>n', '<Cmd>Neogit<CR>', opts)

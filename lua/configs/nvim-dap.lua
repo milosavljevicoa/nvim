@@ -10,7 +10,7 @@ if not status_dap_ok then
   return
 end
 if not status_dap_ui_ok then
-  print "dap-ui not found..."
+  -- print "dap-ui not found..."
   return
 end
 if not status_dap_virtual_text_ok then

@@ -18,12 +18,13 @@ map("n", "<leader>m", "m", opts)
 -- Helix inspired mappings
 map({ "v", "n" }, "gl", "$", opts)
 map({ "v", "n" }, "gs", "^", opts)
-map({ "v", "n" }, "gh", "gg", opts)
-map({ "v", "n" }, "ge", "G", opts)
 map({ "v", "n" }, "mm", "%", opts)
-
--- Helix inspired mapping
 map({ "v", "n" }, "gp", "<C-^>", opts)
+
+-- easier copy paste
+map("n", "<leader>y", "yiw", opts)
+map("n", "<leader>p", "viwp", opts)
+map("n", "<leader>P", "viwpviwy", opts)
 
 --Escape
 map("i", "jk", "<Esc>", opts)
@@ -42,10 +43,6 @@ map("n", "<C-Up>", "<cmd>resize -2<CR>", opts)
 map("n", "<C-Down>", "<cmd>resize +2<CR>", opts)
 map("n", "<C-Left>", "<cmd>vertical resize -2<CR>", opts)
 map("n", "<C-Right>", "<cmd>vertical resize +2<CR>", opts)
-
--- Move text up and down
-map("v", "J", "<Esc><cmd>m .+1<CR>gv", opts)
-map("v", "K", "<Esc><cmd>m .-2<CR>gv", opts)
 
 -- Stay in indent mode
 map("v", "<", "<gv", opts)

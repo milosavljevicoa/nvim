@@ -5,8 +5,7 @@ if not status_ok then
 end
 
 local default_opts = {
-  ensure_installed = { "lua", "typescript", "javascript", "css", "scss", "python", "go", "json", "yaml", "html", "query",
-    "rust" },
+  ensure_installed = { "lua", "typescript", "javascript", "css", "scss", "python", "go", "json", "yaml", "html", "query", "rust", "markdown" },
   sync_install = false,
   ignore_install = {},
   highlight = {

@@ -14,7 +14,6 @@ harpoon.setup {
     width = nvim_width - third_of_screen,
   }
 }
-
 map("n", "<leader>..", "<cmd>:lua require('harpoon.mark').add_file()<CR>", opts)
 map("n", "<leader>.e", "<cmd>:lua require('harpoon.ui').toggle_quick_menu()<CR>", opts)
 map("n", "<leader>.h", "<cmd>:lua require('harpoon.ui').nav_file(1)<CR>", opts)

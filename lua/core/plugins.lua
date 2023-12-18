@@ -122,6 +122,8 @@ packer.startup {
 
     use "folke/tokyonight.nvim"
 
+    use "rebelot/kanagawa.nvim"
+
     use "sindrets/diffview.nvim"
 
     -- Git like magit

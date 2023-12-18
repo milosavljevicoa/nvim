@@ -31,7 +31,7 @@ gitsigns.setup {
     delay = 1000,
     ignore_whitespace = false,
   },
-  current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+  current_line_blame_formatter = '<author>, <author_time:%Y-%b-%d> <author_time:%R> - <summary>',
   sign_priority = 6,
   update_debounce = 100,
   status_formatter = nil, -- Use default
@@ -50,4 +50,7 @@ gitsigns.setup {
 }
 
 map("n", "GJ", "<cmd>Gitsigns next_hunk<CR>", opts)
-map("n", "GK", "<cmdGitsigns prev_hunk<CR>", opts)
+map("n", "GK", "<cmd>Gitsigns prev_hunk<CR>", opts)
+map("n", "GP", "<cmd>Gitsigns preview_hunk<CR>", opts)
+map("n", "GL", "<cmd>Gitsigns preview_hunk_inline<CR>", opts)
+map("n", "GR", "<cmd>Gitsigns reset_hunk<CR>", opts)

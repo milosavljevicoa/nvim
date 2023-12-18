@@ -22,7 +22,6 @@ telescope.setup {
     buffers = {
       show_all_buffers = true,
       sort_lastused = true,
-      previewer = false,
       mappings = {
         i = {
           ["<C-d>"] = "delete_buffer",
@@ -71,7 +70,7 @@ map("n", "<leader>tc", "<cmd>Telescope grep_string<CR>", opts)
 map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
 map("n", "<leader>bl", "<cmd>Telescope buffers<CR>", opts)
 map("n", "<leader>tr", "<cmd>Telescope resume<CR>", opts)
-map("n", "<leader>te", "<cmd>Telescope diagnostics<CR>", opts)
+map("n", "<leader>td", "<cmd>Telescope diagnostics<CR>", opts)
 
 map("n", "<leader>htg", "<cmd>Telescope help_tags<CR>", opts)
 
@@ -88,7 +87,15 @@ map("n", "<leader>tff", function()
   })
 end, opts)
 
+map("n", "<leader>tp", function()
+  require("telescope.builtin").spell_suggest({
+    prompt_title = "Spell Suggest",
+    layout_strategy = 'cursor',
+    layout_config = { height = 0.3, width = 0.2 },
+  })
+end, opts)
+
 map("n", "<leader>gr", "<cmd>Telescope lsp_references<CR>", opts)
 map("n", "<leader>o", "<cmd>Telescope lsp_document_symbols<CR>", opts)
--- nmap("<leader>fc", M.find_siblings_child_files, opts)
--- nmap("<leader>vrc", M.search_nvim(), opts)
+map("n", "<leader>fg", "<cmd>Telescope lsp_workplace_symbols<CR>", opts)
+map("n", "<leader>n", "<cmd>Telescope git_status<CR>", opts)
