@@ -120,6 +120,13 @@ packer.startup {
       end
     }
 
+    use {
+      "stevearc/aerial.nvim",
+      config = function()
+        require("aerial").setup()
+      end,
+    }
+
     use "folke/tokyonight.nvim"
 
     use "rebelot/kanagawa.nvim"
@@ -136,6 +143,5 @@ packer.startup {
     use 'phaazon/hop.nvim'
 
     use 'ThePrimeagen/vim-be-good'
-
   end,
 }

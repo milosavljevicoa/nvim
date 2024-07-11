@@ -5,7 +5,7 @@ vim.cmd [[
   augroup end
 ]]
 
-vim.cmd "autocmd FileType lua,markdown setlocal ts=2 sw=2 expandtab"
+vim.cmd "autocmd FileType lua setlocal ts=2 sw=2 expandtab"
 
 -- vim.cmd "colorscheme tokyonight-moon"
 vim.cmd "colorscheme kanagawa-wave"

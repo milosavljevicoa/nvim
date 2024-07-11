@@ -13,10 +13,6 @@ local default_opts = {
     enable = true,
     additional_vim_regex_highlighting = false,
   },
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
-  },
   incremental_selection = {
     enable = true,
   },
@@ -109,6 +105,16 @@ local default_opts = {
 }
 
 treesitter.setup(default_opts)
+
+local status_ts_coment_ok, ts_comment = pcall(require, "ts_context_commentstring")
+if not status_ts_coment_ok then
+  print ("---Could not load ts_context_commentstring---")
+  return
+end
+
+ts_comment.setup {
+  enable_autocmd = false,
+}
 
 local status_ts_c_ok, treesitter_context = pcall(require, "treesitter-context")
 if not status_ts_c_ok then

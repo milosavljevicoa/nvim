@@ -95,6 +95,7 @@ map("n", "<leader>tp", function()
   })
 end, opts)
 
+
 map("n", "<leader>gr", "<cmd>Telescope lsp_references<CR>", opts)
 map("n", "<leader>o", "<cmd>Telescope lsp_document_symbols<CR>", opts)
 map("n", "<leader>fg", "<cmd>Telescope lsp_workplace_symbols<CR>", opts)

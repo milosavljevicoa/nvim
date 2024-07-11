@@ -9,6 +9,10 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 
+-- Horizontal scrolling
+map({ "v", "n" }, "L", "zl", opts)
+map({ "v", "n" }, "H", "zh", opts)
+
 -- Reload config with mappings
 map("n", "<leader>vrc", "", opts)
 
@@ -45,8 +49,8 @@ map("n", "<C-Left>", "<cmd>vertical resize -2<CR>", opts)
 map("n", "<C-Right>", "<cmd>vertical resize +2<CR>", opts)
 
 -- Stay in indent mode
-map("v", "<", "<gv", opts)
-map("v", ">", ">gv", opts)
+-- map("v", "<", "<gv", opts)
+-- map("v", ">", ">gv", opts)
 
 -- File switcher
 -- Angular

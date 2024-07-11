@@ -69,8 +69,8 @@ local on_attach = function(client, bufnr)
   map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
   map("n", "<leader>gl", function() vim.diagnostic.open_float() end, opts)
   map("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
-  map("n", "gj", function() vim.diagnostic.goto_next() end, opts)
-  map("n", "gk", function() vim.diagnostic.goto_prev() end, opts)
+  map("n", "gj", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, opts)
+  map("n", "gk", function() vim.diagnostic.goto_prev({ severity = vim.diagnostic.severity.ERROR }) end, opts)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -85,10 +85,10 @@ lspconfig['tsserver'].setup {
   on_attach = on_attach,
 }
 
--- lspconfig['cssls'].setup {
---   capabilities = capabilities,
---   on_attach = on_attach,
--- }
+lspconfig['cssls'].setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
 
 local status_ok, rust_tools = pcall(require, "rust-tools")
 if not status_ok then
