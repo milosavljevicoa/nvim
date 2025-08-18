@@ -19,27 +19,24 @@ end
 mason.setup()
 mason_lspconfig.setup()
 
-local signs = {
-  { name = "DiagnosticSignError", text = "" },
-  { name = "DiagnosticSignWarn", text = "" },
-  { name = "DiagnosticSignHint", text = "" },
-  { name = "DiagnosticSignInfo", text = "" },
-}
-
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
   vim.lsp.handlers.hover, {
-  border = "single",
-})
+    border = "single",
+  })
 
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
   border = "rounded",
 })
 
-for _, sign in ipairs(signs) do
-  vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-end
-
 vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = '',
+      [vim.diagnostic.severity.WARN] = '',
+      [vim.diagnostic.severity.INFO] = '',
+      [vim.diagnostic.severity.HINT] = '',
+    }
+  },
   virtual_text = true,
   -- signs = true,
   update_in_insert = true,
@@ -63,8 +60,8 @@ local on_attach = function(client, bufnr)
   map('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
   map('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
   map('n', 'GD', function() vim.lsp.buf.type_definition() end, opts)
-  map({'i', 'n'}, '<c-l>', function() vim.lsp.buf.signature_help() end, opts)
-  map({'v', 'n'}, '<leader>fr', function() vim.lsp.buf.format({ async = true }) end, opts)
+  map({ 'i', 'n' }, '<c-l>', function() vim.lsp.buf.signature_help() end, opts)
+  map({ 'v', 'n' }, '<leader>fr', function() vim.lsp.buf.format({ async = true }) end, opts)
   map("n", "K", function() vim.lsp.buf.hover() end, opts)
   map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
   map("n", "<leader>gl", function() vim.diagnostic.open_float() end, opts)
@@ -74,18 +71,27 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+  callback = function(event)
+    on_attach()
+  end
 
-lspconfig['lua_ls'].setup {
+})
+
+
+vim.lsp.enable('lua_ls')
+lspconfig['lua_ls'].enable {
   capabilities = capabilities,
   on_attach = on_attach,
 }
 
-lspconfig['tsserver'].setup {
+lspconfig['ts_ls'].setup {
   capabilities = capabilities,
   on_attach = on_attach,
 }
 
-lspconfig['cssls'].setup {
+lspconfig['cssls'].enable {
   capabilities = capabilities,
   on_attach = on_attach,
 }

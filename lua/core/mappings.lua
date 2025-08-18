@@ -27,8 +27,9 @@ map({ "v", "n" }, "gp", "<C-^>", opts)
 
 -- easier copy paste
 map("n", "<leader>y", "yiw", opts)
-map("n", "<leader>p", "viwp", opts)
-map("n", "<leader>P", "viwpviwy", opts)
+map("n", "<leader>P", "viwp", opts)
+map("n", "<leader>p", "viwpgvy", opts)
+map("v", "<leader>p", "pgvy", opts)
 
 --Escape
 map("i", "jk", "<Esc>", opts)
@@ -47,6 +48,9 @@ map("n", "<C-Up>", "<cmd>resize -2<CR>", opts)
 map("n", "<C-Down>", "<cmd>resize +2<CR>", opts)
 map("n", "<C-Left>", "<cmd>vertical resize -2<CR>", opts)
 map("n", "<C-Right>", "<cmd>vertical resize +2<CR>", opts)
+
+map('n', "<leader>dv", "<cmd>DiffviewOpen<CR>", opts)
+map('n', "<leader>dc", "<cmd>DiffviewClose<CR>", opts)
 
 -- Stay in indent mode
 -- map("v", "<", "<gv", opts)

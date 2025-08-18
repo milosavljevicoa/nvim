@@ -134,7 +134,8 @@ packer.startup {
     use "sindrets/diffview.nvim"
 
     -- Git like magit
-    use "TimUntersberger/neogit"
+    -- use "TimUntersberger/neogit"
+    use "NeogitOrg/neogit"
 
     -- Merge conflicts
     use "akinsho/git-conflict.nvim"
@@ -143,5 +144,13 @@ packer.startup {
     use 'phaazon/hop.nvim'
 
     use 'ThePrimeagen/vim-be-good'
+
+        -- Example with lazy.nvim
+    use {
+        'machakann/vim-highlightedyank',
+        config = function()
+            vim.g.highlightedyank_highlight_duration = 300 -- Highlight duration in milliseconds
+        end,
+    }
   end,
 }

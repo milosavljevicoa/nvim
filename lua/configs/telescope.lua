@@ -8,7 +8,6 @@ if not status_ok then
 end
 
 local actions = require "telescope.actions"
-telescope.load_extension "fzy_native"
 local previewers = require "telescope.previewers"
 
 telescope.setup {
@@ -33,9 +32,9 @@ telescope.setup {
     },
   },
   defaults = {
-    prompt_prefix = " ",
-    selection_caret = "❯ ",
-    path_display = { "truncate" },
+    -- prompt_prefix = " ",
+    -- selection_caret = "❯ ",
+    -- path_display = { "truncate" },
     file_ignore_patterns = { 'build', 'tags', 'autoload', "\\.git", 'plugged', 'node_modules' },
     file_sorter = require("telescope.sorters").get_fzy_sorter,
     file_previewer = previewers.vim_buffer_cat.new,
@@ -58,6 +57,7 @@ telescope.setup {
     },
   },
   extensions = {
+    -- fzf= {}
     fzy_native = {
       override_generic_sorter = false,
       override_file_sorter = true,
@@ -65,12 +65,22 @@ telescope.setup {
   },
 }
 
-map("n", "<leader>tg", "<cmd>Telescope live_grep<CR>", opts)
+require('telescope').load_extension "fzy_native"
+-- require('telescope').load_extension('fzf')
+
+map("n", "<leader>tg", "<cmd>Telescope live_grep hidden=true<CR>", opts)
 map("n", "<leader>tc", "<cmd>Telescope grep_string<CR>", opts)
-map("n", "<leader>ff", "<cmd>Telescope find_files<CR>", opts)
+map("n", "<leader>ff", "<cmd>Telescope find_files hidden=true<CR>", opts)
 map("n", "<leader>bl", "<cmd>Telescope buffers<CR>", opts)
 map("n", "<leader>tr", "<cmd>Telescope resume<CR>", opts)
 map("n", "<leader>td", "<cmd>Telescope diagnostics<CR>", opts)
+map("n", "<leader>/", function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+    winblend = 10,
+    previewer = false,
+  }))
+end, opts)
 
 map("n", "<leader>htg", "<cmd>Telescope help_tags<CR>", opts)
 
