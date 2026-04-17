@@ -3,26 +3,16 @@ local M = {}
 local g = vim.g
 
 function M.bootstrap()
-  if pcall(require, "packer") then
-    return
+  local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+  if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    vim.fn.system({
+      "git", "clone", "--filter=blob:none",
+      "https://github.com/folke/lazy.nvim.git",
+      "--branch=stable",
+      lazypath,
+    })
   end
-
-  if vim.fn.input "Download Packer? (y for yes): " ~= "y" then
-    return
-  end
-
-  local directory = string.format("%s/site/pack/packer/start/", vim.fn.stdpath "data")
-
-  vim.fn.mkdir(directory, "p")
-
-  local out = vim.fn.system(
-    string.format("git clone %s %s", "https://github.com/wbthomason/packer.nvim", directory .. "/packer.nvim")
-  )
-
-  print(out)
-  print "Downloading packer.nvim..."
-  print "( You'll need to restart now )"
-  vim.cmd [[qa]]
+  vim.opt.rtp:prepend(lazypath)
 end
 
 function M.disabled_builtins()
@@ -39,7 +29,7 @@ function M.disabled_builtins()
 end
 
 function M.getPathConcatenator()
-  local sysname = string.lower(vim.loop.os_uname().sysname)
+  local sysname = string.lower((vim.uv or vim.loop).os_uname().sysname)
   if string.match(sysname, 'windows') then
     return '\\'
   else
@@ -55,20 +45,5 @@ function M.makePath(paths)
   end
   return returnPath
 end
-
-
---[[M.imap = function(keymap, handler, opts)
-  if not opts then
-    opts = {}
-  end
-  vim.keymap.set('i', keymap, handler, opts)
-end
-
-M.nmap = function(keymap, handler, opts)
-  if not opts then
-    opts = {}
-  end
-  vim.keymap.set('n', keymap, handler, opts)
-end--]]
 
 return M

@@ -16,18 +16,6 @@ if not lspkind_status_ok then
   return
 end
 
-local ELLIPSIS_CHAR = '…'
-local MAX_LABEL_WIDTH = 20
--- limit lenght of a completion item
-local format = function(entry, vim_item)
-  local label = vim_item.abbr
-  local truncated_label = vim.fn.strcharpart(label, 0, MAX_LABEL_WIDTH)
-  if truncated_label ~= label then
-    vim_item.abbr = truncated_label .. ELLIPSIS_CHAR
-  end
-  return vim_item
-end
-
 -- local kind_icons = {
 --   Text = "",
 --   Method = "",
@@ -76,10 +64,12 @@ end
 cmp.setup {
   performance = {
     debounce = 150,
+    throttle = 60,      -- max rate after first trigger
+    fetching_timeout = 200, -- give up on slow sources sooner
   },
   formatting = {
     format = lspkind.cmp_format {
-      with_text = true,
+      mode = "symbol_text",
       menu = {
         buffer = "[buf]",
         nvim_lsp = "[LSP]",
@@ -100,12 +90,11 @@ cmp.setup {
   },
   experimental = {
     ghost_text = false,
-    native_menu = false,
   },
   sources = cmp.config.sources({ -- Order matters on what completions you will see first
     {
       name = 'nvim_lsp',
-      -- disable snipets from nvim_lsp
+      max_item_count = 60, -- ts_ls can return hundreds; cap to keep cmp fast
       entry_filter = function(entry)
         return cmp.lsp.CompletionItemKind.Snippet ~= entry:get_kind()
       end

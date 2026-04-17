@@ -1,156 +1,128 @@
-local packer_status_ok, packer = pcall(require, "packer")
-if not packer_status_ok then
-  print "Packer not installed"
+local lazy_ok, lazy = pcall(require, "lazy")
+if not lazy_ok then
+  print("lazy.nvim not installed")
   return
 end
 
-packer.startup {
-  function(use)
-    -- note tracker
-    -- https://github.com/oberblastmeister/neuron.nvim
-    -- https://github.com/vimwiki/vimwiki
-    -- https://github.com/nvim-neorg/neorg
+lazy.setup({
+  -- Lua functions
+  { "nvim-lua/plenary.nvim" },
 
-    -- Plugin manager
-    use "wbthomason/packer.nvim"
+  -- Undotree
+  { "mbbill/undotree" },
 
-    -- Lua functions
-    use "nvim-lua/plenary.nvim"
+  -- Icons
+  { "nvim-tree/nvim-web-devicons" },
 
-    -- Popup API
-    use "nvim-lua/popup.nvim"
+  -- File explorer
+  { "nvim-tree/nvim-tree.lua" },
 
-    -- Undotree
-    use {
-      "mbbill/undotree",
-    }
+  -- Statusline
+  { "nvim-lualine/lualine.nvim" },
 
-    -- Icons
-    use {
-      "kyazdani42/nvim-web-devicons",
-    }
+  -- DAP
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      { "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
+      "theHamsta/nvim-dap-virtual-text",
+    },
+  },
 
-    -- File explorer
-    use {
-      "kyazdani42/nvim-tree.lua",
-    }
+  -- Treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    dependencies = {
+      "JoosepAlviste/nvim-ts-context-commentstring",
+      "windwp/nvim-ts-autotag",
+      "nvim-treesitter/nvim-treesitter-context",
+      "nvim-treesitter/nvim-treesitter-textobjects",
+    },
+  },
 
-    -- Statusline
-    use {
-      "nvim-lualine/lualine.nvim",
-    }
+  -- Snippets
+  {
+    "L3MON4D3/LuaSnip",
+    build = "make install_jsregexp",
+    dependencies = { "rafamadriz/friendly-snippets" },
+  },
 
-    use "rcarriga/nvim-dap-ui"
-    use "theHamsta/nvim-dap-virtual-text"
-    use "mfussenegger/nvim-dap"
-
-    -- Tree sitter
-    use "nvim-treesitter/nvim-treesitter"
-    use "JoosepAlviste/nvim-ts-context-commentstring"
-    use "windwp/nvim-ts-autotag"
-    use "nvim-treesitter/playground"
-    use "nvim-treesitter/nvim-treesitter-context"
-    use "nvim-treesitter/nvim-treesitter-textobjects"
-
-    -- Snippet engine
-    use "L3MON4D3/LuaSnip"
-    use "rafamadriz/friendly-snippets"
-
-    -- Completion engine
-    use "hrsh7th/nvim-cmp"
-    use({
-      'hrsh7th/cmp-cmdline',
-      -- Snippet completion source
+  -- Completion
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/cmp-cmdline",
       "saadparwaiz1/cmp_luasnip",
-      -- Buffer completion source
       "hrsh7th/cmp-buffer",
-      -- Path completion source
       "hrsh7th/cmp-path",
-      -- Pictorgrams for lsp
       "onsails/lspkind-nvim",
-      -- LSP completion source
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-nvim-lsp-document-symbol",
       "hrsh7th/cmp-nvim-lsp-signature-help",
-      after = { "hrsh7th/nvim-cmp" },
-      requires = { "hrsh7th/nvim-cmp" },
-    })
+    },
+  },
 
+  -- LSP
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+    },
+  },
 
-    -- LSP
-    use 'williamboman/mason.nvim'
-    use 'williamboman/mason-lspconfig.nvim'
-    use 'simrat39/rust-tools.nvim'
-    use "neovim/nvim-lspconfig"
+  -- Fuzzy finder
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      { "nvim-telescope/telescope-fzy-native.nvim", build = "make" },
+    },
+  },
 
-    -- Fuzzy finder
-    use "nvim-telescope/telescope.nvim"
+  -- Git
+  { "lewis6991/gitsigns.nvim" },
+  { "sindrets/diffview.nvim" },
+  { "NeogitOrg/neogit" },
+  { "akinsho/git-conflict.nvim" },
 
-    -- Fuzzy finder syntax support
-    use { "nvim-telescope/telescope-fzy-native.nvim", run = "make", }
+  -- Autopairs
+  { "windwp/nvim-autopairs" },
 
-    -- Git integration
-    use "lewis6991/gitsigns.nvim"
+  -- Commenting
+  { "numToStr/Comment.nvim" },
 
-    -- Autopairs
-    use "windwp/nvim-autopairs"
+  -- File switcher
+  { "milosavljevicoa/switcher.nvim" },
 
-    -- Commenting
-    use "numToStr/Comment.nvim"
+  -- Harpoon
+  { "ThePrimeagen/harpoon" },
 
-    -- File switcher
-    use "milosavljevicoa/switcher.nvim"
+  -- Zen mode
+  {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup {
+        window = {
+          backdrop = 0.95,
+          width = 0.7,
+        },
+      }
+    end,
+  },
 
-    -- Harpoon
-    use "ThePrimeagen/harpoon"
+  -- Symbol outline
+  { "stevearc/aerial.nvim" },
 
-    use {
-      "folke/zen-mode.nvim",
-      config = function()
-        require("zen-mode").setup {
-          window = {
-            backdrop = 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-            width = 0.7
-            -- height and width can be:
-            -- * an absolute number of cells when > 1
-            -- * a percentage of the width / height of the editor when <= 1
-            -- * a function that returns the width or
-          }
-        }
-      end
-    }
+  -- Colorschemes
+  { "folke/tokyonight.nvim" },
+  { "rebelot/kanagawa.nvim" },
 
-    use {
-      "stevearc/aerial.nvim",
-      config = function()
-        require("aerial").setup()
-      end,
-    }
+  -- Jump around
+  { "smoka7/hop.nvim" },
 
-    use "folke/tokyonight.nvim"
-
-    use "rebelot/kanagawa.nvim"
-
-    use "sindrets/diffview.nvim"
-
-    -- Git like magit
-    -- use "TimUntersberger/neogit"
-    use "NeogitOrg/neogit"
-
-    -- Merge conflicts
-    use "akinsho/git-conflict.nvim"
-
-    -- Jump around
-    use 'phaazon/hop.nvim'
-
-    use 'ThePrimeagen/vim-be-good'
-
-        -- Example with lazy.nvim
-    use {
-        'machakann/vim-highlightedyank',
-        config = function()
-            vim.g.highlightedyank_highlight_duration = 300 -- Highlight duration in milliseconds
-        end,
-    }
-  end,
-}
+  -- Practice
+  { "ThePrimeagen/vim-be-good" },
+})
