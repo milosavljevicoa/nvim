@@ -19,14 +19,6 @@ end
 mason.setup()
 mason_lspconfig.setup()
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-  vim.lsp.handlers.hover, {
-    border = "single",
-  })
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = "rounded",
-})
 
 vim.diagnostic.config({
   signs = {
@@ -63,7 +55,13 @@ local on_attach = function(client, bufnr)
   map({ 'i', 'n' }, '<c-l>', function() vim.lsp.buf.signature_help() end, opts)
   map({ 'v', 'n' }, '<leader>fr', function() vim.lsp.buf.format({ async = true }) end, opts)
   map("n", "K", function() vim.lsp.buf.hover() end, opts)
-  map("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
+  map("n", "<leader>ca", function()
+    vim.lsp.buf.code_action({
+      filter = function(action)
+        return not action.disabled
+      end
+    })
+  end, opts)
   map("n", "<leader>gl", function() vim.diagnostic.open_float() end, opts)
   map("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
   map("n", "gj", function() vim.diagnostic.goto_next({ severity = vim.diagnostic.severity.ERROR }) end, opts)
