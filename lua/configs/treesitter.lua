@@ -1,177 +1,72 @@
-local status_ok, treesitter = pcall(require, "nvim-treesitter.configs")
+local status_ok, treesitter = pcall(require, "nvim-treesitter")
 if not status_ok then
-  print ("---Could not load nvim-treesitter.configs---")
+  print("---Could not load nvim-treesitter---")
   return
 end
 
-local default_opts = {
-  ensure_installed = { "lua", "typescript", "javascript", "css", "scss", "python", "go", "json", "yaml", "html", "query", "rust", "markdown" },
-  sync_install = false,
-  ignore_install = {},
-  highlight = {
-    disable = { "html" },
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-  incremental_selection = {
-    enable = true,
-  },
-  indent = {
-    enable = true,
-  },
-  autotag = {
-    enable = true,
-  },
-  textobjects = {
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        ["]f"] = "@function.outer",
-        ["]c"] = "@class.outer",
-      },
-      goto_previous_start = {
-        ["[f"] = "@function.outer",
-        ["[c"] = "@class.outer",
-      },
-      goto_next_end = {
-        ["]F"] = "@function.outer",
-        ["]C"] = "@class.outer",
-      },
-      goto_previous_end = {
-        ["[F"] = "@function.outer",
-        ["[C"] = "@class.outer",
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = {
-        ["<leader>sn"] = "@parameter.inner",
-      },
-      swap_previous = {
-        ["<leader>sp"] = "@parameter.inner",
-      },
-    },
+treesitter.setup()
+
+-- Install parsers if missing
+local parsers = { "lua", "typescript", "javascript", "tsx", "css", "scss", "python", "go", "json", "yaml", "html", "query", "rust", "markdown" }
+treesitter.install(parsers)
+
+-- Textobjects
+local status_to_ok, textobjects = pcall(require, "nvim-treesitter-textobjects")
+if status_to_ok then
+  textobjects.setup({
     select = {
-      enable = true,
-
-      -- Automatically jump forward to textobj, similar to targets.vim
       lookahead = true,
-
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        -- you can optionally set descriptions to the mappings (used in the desc parameter of nvim_buf_set_keymap
-        ["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-      },
-      -- You can choose the select mode (default is charwise 'v')
-      selection_modes = {
-        ['@parameter.outer'] = 'v', -- charwise
-        ['@function.outer'] = 'V', -- linewise
-        ['@class.outer'] = '<c-v>', -- blockwise
-      },
-      -- If you set this to `true` (default is `false`) then any textobject is
-      -- extended to include preceding xor succeeding whitespace. Succeeding
-      -- whitespace has priority in order to act similarly to eg the built-in
-      -- `ap`.
       include_surrounding_whitespace = true,
+      selection_modes = {
+        ["@parameter.outer"] = "v",
+        ["@function.outer"] = "V",
+        ["@class.outer"] = "<c-v>",
+      },
     },
-  },
-}
+    move = {
+      set_jumps = true,
+    },
+  })
 
-treesitter.setup(default_opts)
+  local map = vim.keymap.set
+  local opts = { noremap = true, silent = true }
 
-local status_ts_coment_ok, ts_comment = pcall(require, "ts_context_commentstring")
-if not status_ts_coment_ok then
-  print ("---Could not load ts_context_commentstring---")
-  return
+  map("n", "]f", function() require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer") end, opts)
+  map("n", "]F", function() require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer") end, opts)
+
+  map("n", "[f", function() require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer") end, opts)
+  map("n", "[F", function() require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer") end, opts)
+
+  map("n", "]c", function() require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer") end, opts)
+  map("n", "[c", function() require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer") end, opts)
+
+  map("n", "]C", function() require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer") end, opts)
+  map("n", "[C", function() require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer") end, opts)
+
+  map("n", "]]", function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end, opts)
+  map("n", "[[", function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end, opts)
+
+  map({ "x", "o" }, "af", function() require("nvim-treesitter-textobjects.select").select_textobject("@function.outer") end, opts)
+  map({ "x", "o" }, "if", function() require("nvim-treesitter-textobjects.select").select_textobject("@function.inner") end, opts)
+  map({ "x", "o" }, "ac", function() require("nvim-treesitter-textobjects.select").select_textobject("@class.outer") end, opts)
+  map({ "x", "o" }, "ic", function() require("nvim-treesitter-textobjects.select").select_textobject("@class.inner") end, opts)
 end
 
-ts_comment.setup {
-  enable_autocmd = false,
-}
+-- Context commentstring
+local status_ts_comment_ok, ts_comment = pcall(require, "ts_context_commentstring")
+if status_ts_comment_ok then
+  ts_comment.setup({ enable_autocmd = false })
+end
 
+-- Treesitter context
 local status_ts_c_ok, treesitter_context = pcall(require, "treesitter-context")
-if not status_ts_c_ok then
-  print("---treesitter-context not installed---")
-  return
+if status_ts_c_ok then
+  treesitter_context.setup({
+    enable = true,
+    max_lines = 0,
+    trim_scope = "outer",
+    mode = "cursor",
+    zindex = 20,
+    separator = nil,
+  })
 end
-
-treesitter_context.setup {
-  enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-  max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-  trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-  patterns = { -- Match patterns for TS nodes. These get wrapped to match at word boundaries.
-    -- For all filetypes
-    -- Note that setting an entry here replaces all other patterns for this entry.
-    -- By setting the 'default' entry below, you can control which nodes you want to
-    -- appear in the context window.
-    default = {
-      'class',
-      'function',
-      'method',
-      'for',
-      'while',
-      'if',
-      'switch',
-      'case',
-    },
-    -- Patterns for specific filetypes
-    -- If a pattern is missing, *open a PR* so everyone can benefit.
-    tex = {
-      'chapter',
-      'section',
-      'subsection',
-      'subsubsection',
-    },
-    rust = {
-      'impl_item',
-      'struct',
-      'enum',
-    },
-    scala = {
-      'object_definition',
-    },
-    vhdl = {
-      'process_statement',
-      'architecture_body',
-      'entity_declaration',
-    },
-    markdown = {
-      'section',
-    },
-    elixir = {
-      'anonymous_function',
-      'arguments',
-      'block',
-      'do_block',
-      'list',
-      'map',
-      'tuple',
-      'quoted_content',
-    },
-    json = {
-      'pair',
-    },
-    yaml = {
-      'block_mapping_pair',
-    },
-  },
-  exact_patterns = {
-    -- Example for a specific filetype with Lua patterns
-    -- Treat patterns.rust as a Lua pattern (i.e "^impl_item$" will
-    -- exactly match "impl_item" only)
-    -- rust = true,
-  },
-
-  -- [!] The options below are exposed but shouldn't require your attention,
-  --     you can safely ignore them.
-
-  zindex = 20, -- The Z-index of the context window
-  mode = 'cursor', -- Line used to calculate context. Choices: 'cursor', 'topline'
-  -- Separator between context and content. Should be a single character string, like '-'.
-  -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-  separator = nil,
-}

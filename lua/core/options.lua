@@ -38,4 +38,3 @@ set.timeoutlen = 700          -- Length of time to wait for a mapped sequence
 set.updatetime = 500          -- Length of time to wait before triggering the plugin (higher = fewer LSP CursorHold requests)
 set.winborder = "rounded"     -- Border style for floating windows
 
-vim.cmd("colorscheme kanagawa-wave")

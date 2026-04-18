@@ -28,16 +28,17 @@ ls.config.set_config {
 
 
 require("configs.luasnip.rust")
+require("configs.luasnip.react_ts")
 
 -- next jump in snippet
-map({ "i", "s" }, "<c-j>", function()
+map({ "i", "s" }, "<c-k>", function()
   if ls.expand_or_jumpable() then
     ls.expand_or_jump()
   end
 end, opts)
 
 -- previous jump in snippet
-map({ "i", "s" }, "<c-k>", function()
+map({ "i", "s" }, "<c-j>", function()
   if ls.jumpable(-1) then
     ls.jump(-1)
   end

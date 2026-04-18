@@ -39,6 +39,9 @@ lazy.setup({
       "nvim-treesitter/nvim-treesitter-context",
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
+    config = function()
+      require("configs.treesitter")
+    end,
   },
 
   -- Snippets
@@ -118,7 +121,13 @@ lazy.setup({
 
   -- Colorschemes
   { "folke/tokyonight.nvim" },
-  { "rebelot/kanagawa.nvim" },
+  {
+    "rebelot/kanagawa.nvim",
+    priority = 1000,
+    config = function()
+      vim.cmd.colorscheme("kanagawa-wave")
+    end,
+  },
 
   -- Jump around
   { "smoka7/hop.nvim" },
