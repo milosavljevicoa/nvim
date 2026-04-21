@@ -39,9 +39,42 @@ vim.diagnostic.config({
 
 local map = vim.keymap.set
 
+local function go_to_definition()
+  local clients = vim.lsp.get_clients({ bufnr = 0 })
+  local encoding = clients[1] and clients[1].offset_encoding or 'utf-8'
+  local params = vim.lsp.util.make_position_params(vim.api.nvim_get_current_win(), encoding)
+  vim.lsp.buf_request_all(0, 'textDocument/definition', params, function(results)
+    local locations = {}
+    for _, result in pairs(results) do
+      if result.result then
+        local locs = vim.islist(result.result) and result.result or { result.result }
+        vim.list_extend(locations, locs)
+      end
+    end
+
+    local non_node = vim.tbl_filter(function(loc)
+      local uri = loc.uri or loc.targetUri or ''
+      return not uri:find('node_modules', 1, true)
+    end, locations)
+
+    local final = #non_node > 0 and non_node or locations
+    if #final == 0 then return end
+
+    if #final == 1 then
+      vim.lsp.util.show_document(final[1], 'utf-8', { focus = true })
+    else
+      vim.fn.setqflist({}, ' ', {
+        title = 'LSP Definitions',
+        items = vim.lsp.util.locations_to_items(final, 'utf-8'),
+      })
+      vim.cmd('copen')
+    end
+  end)
+end
+
 local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
-  map('n', 'gd', vim.lsp.buf.definition, opts)
+  map('n', 'gd', go_to_definition, opts)
   map('n', 'gD', vim.lsp.buf.declaration, opts)
   map('n', 'gi', vim.lsp.buf.implementation, opts)
   map('n', 'GD', vim.lsp.buf.type_definition, opts)
