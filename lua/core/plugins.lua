@@ -39,6 +39,8 @@ lazy.setup({
       "nvim-treesitter/nvim-treesitter-context",
       "nvim-treesitter/nvim-treesitter-textobjects",
     },
+    branch = 'master',
+    lazy = false,
     config = function()
       require("configs.treesitter")
     end,

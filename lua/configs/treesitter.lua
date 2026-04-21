@@ -4,11 +4,29 @@ if not status_ok then
   return
 end
 
-treesitter.setup()
-
 -- Install parsers if missing
-local parsers = { "lua", "typescript", "javascript", "tsx", "css", "scss", "python", "go", "json", "yaml", "html", "query", "rust", "markdown" }
-treesitter.install(parsers)
+-- nvim 012
+-- local parsers = { "lua", "typescript", "javascript", "tsx", "css", "scss", "python", "go", "json", "yaml", "html", "query", "rust", "markdown" }
+-- treesitter.install(parsers)
+
+-- nvim 0.11
+treesitter.setup({
+  ensure_installed = { "lua", "typescript", "javascript", "tsx", "css", "scss", "python", "go", "json", "yaml", "html", "query", "rust", "markdown" },
+  highlight = {
+    disable = { "html" },
+    enable = true,
+    additional_vim_regex_highlighting = false,
+  },
+  incremental_selection = {
+    enable = true,
+  },
+  indent = {
+    enable = true,
+  },
+  autotag = {
+    enable = true,
+  },
+})
 
 -- Textobjects
 local status_to_ok, textobjects = pcall(require, "nvim-treesitter-textobjects")
@@ -46,10 +64,14 @@ if status_to_ok then
   map("n", "]]", function() require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner") end, opts)
   map("n", "[[", function() require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.inner") end, opts)
 
-  map({ "x", "o" }, "af", function() require("nvim-treesitter-textobjects.select").select_textobject("@function.outer") end, opts)
-  map({ "x", "o" }, "if", function() require("nvim-treesitter-textobjects.select").select_textobject("@function.inner") end, opts)
-  map({ "x", "o" }, "ac", function() require("nvim-treesitter-textobjects.select").select_textobject("@class.outer") end, opts)
-  map({ "x", "o" }, "ic", function() require("nvim-treesitter-textobjects.select").select_textobject("@class.inner") end, opts)
+  map({ "x", "o" }, "af",
+    function() require("nvim-treesitter-textobjects.select").select_textobject("@function.outer") end, opts)
+  map({ "x", "o" }, "if",
+    function() require("nvim-treesitter-textobjects.select").select_textobject("@function.inner") end, opts)
+  map({ "x", "o" }, "ac", function() require("nvim-treesitter-textobjects.select").select_textobject("@class.outer") end,
+    opts)
+  map({ "x", "o" }, "ic", function() require("nvim-treesitter-textobjects.select").select_textobject("@class.inner") end,
+    opts)
 end
 
 -- Context commentstring
