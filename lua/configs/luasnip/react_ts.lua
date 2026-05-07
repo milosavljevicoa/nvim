@@ -187,7 +187,7 @@ try {{
 ]], { i(1), i(0) })),
 
   -- Console.log with label
-  s("cl", fmt('console.log("{}: ", {});', { same(1), i(1) })),
+  s("cl", fmt('console.log("{}");', { i(0) })),
 
   -- Console.error
   s("ce", fmt('console.error("{}: ", {});', { same(1), i(1) })),
