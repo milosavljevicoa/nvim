@@ -63,6 +63,10 @@ map('n', "<leader>dc", "<cmd>DiffviewClose<CR>", opts)
 -- map("n", "<A-n>", "<cmd>lua require('switcher').switch_to('spec.ts', 'spec')<CR>", opts)
 -- map("n", "<A-s>", "<cmd>lua require('switcher').switch_to('scss', 'spec')<CR>", opts)
 
+map("n", "<leader>tn", function()
+  require("core.tempfile").create()
+end, opts)
+
 local executeMappingns = function()
   local scan = require 'plenary.scandir'
   local utils = require 'core.utils'
