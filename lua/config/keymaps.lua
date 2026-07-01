@@ -20,3 +20,9 @@ map("v", "<leader>yc", '"+y', { desc = "Copy to system clipboard" })
 map("n", "<leader>yy", "yiw", { desc = "Yank inner word" })
 map("n", "<leader>yP", "viwp", { desc = "Replace word with paste" })
 map({ "v", "n" }, "<leader>yp", "viwpgvy", { desc = "Paste over word (keep register)" })
+
+-- Map 'GG' to 'G' (go to bottom)
+vim.keymap.set("n", "GG", "G", { noremap = true, desc = "Go to bottom of file" })
+
+-- Optional: Disable the single 'G' so you don't trigger it by mistake
+vim.keymap.set("n", "G", "<Nop>", { noremap = true })
